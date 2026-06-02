@@ -1,6 +1,6 @@
 // Service Worker — Cache-first strategy
 // Bump CACHE_NAME to force a fresh cache on next visit.
-const CACHE_NAME = 'myanmar-cs-v1';
+const CACHE_NAME = 'myanmar-cs-v2';
 
 // Every file the app needs to work fully offline.
 // Keep this list in sync with the actual files in the repo.
@@ -25,6 +25,12 @@ const CACHE_MANIFEST = [
   './js/tutor.js',
   './js/stats.js',
 
+  // Pyodide sandbox
+  './pyodide-sandbox.html',
+
+  // CodeMirror 6 vendor bundle
+  './vendor/codemirror/codemirror.min.js',
+
   // Lesson manifest + all lessons
   './lessons/index.json',
   './lessons/01-what-is-code.json',
@@ -41,8 +47,17 @@ const CACHE_MANIFEST = [
   './lessons/12-dictionaries.json',
   './lessons/13-final-project.json',
 
-  // Assets
+  // Assets — icons
   './assets/icons/icon.svg',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+
+  // Fonts (self-hosted IBM Plex)
+  './assets/fonts/IBMPlexSans-Regular.woff2',
+  './assets/fonts/IBMPlexSans-Medium.woff2',
+  './assets/fonts/IBMPlexSans-Bold.woff2',
+  './assets/fonts/IBMPlexMono-Regular.woff2',
+  './assets/fonts/IBMPlexMono-Bold.woff2',
 ];
 
 // ─── Install: pre-cache everything ──────────────────────────────────────────

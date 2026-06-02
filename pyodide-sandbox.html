@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  pyodide-sandbox.html — Python execution sandbox
+
+  Runs inside a hidden <iframe> in the main app. Communicates via postMessage:
+
+  Receives:  { type: 'run', code: string, id: string }
+  Sends:     { type: 'ready' }
+             { type: 'loading', progress: number (0-1), text: string }
+             { type: 'result', id: string, stdout: string, stderr: string, error: string|null }
+             { type: 'load-error', message: string }
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>Python Sandbox</title>
+  <script>
+  'use strict';
+
+  const CDN_BASE  = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+  const CDN_URL   = CDN_BASE + 'pyodide.js';
+  const LOCAL_URL = '../pyodide/pyodide.js';
+
+  let pyodide    = null;
+  let isReady    = false;
+  const runQueue = []; // messages that arrive before ready
+
+  // ─── Init ──────────────────────────────────────────────────────────────────
+
+  async function init() {
+    post({ type: 'loading', progress: 0, text: 'Checking for local Python runtime…' });
+
+    let scriptSrc = CDN_URL;
+    let indexURL  = CDN_BASE;
+
+    // Prefer local (USB) copy if it exists
+    try {
+      const probe = await fetch(LOCAL_URL, { method: 'HEAD', cache: 'no-store' });
+      if (probe.ok) {
+        scriptSrc = LOCAL_URL;
+        indexURL  = '../pyodide/';
+        post({ type: 'loading', progress: 0.05, text: 'Found local Python runtime (USB mode).' });
+      }
+    } catch (_) {
+      // local not found — use CDN
+    }
+
+    if (scriptSrc === CDN_URL) {
+      post({ type: 'loading', progress: 0.05, text: 'Downloading Python runtime (one-time, ~10 MB)…' });
+    }
+
+    try {
+      await loadScript(scriptSrc);
+    } catch (err) {
+      post({ type: 'load-error', message: 'Could not load Pyodide script. Check your internet connection.' });
+      return;
+    }
+
+    post({ type: 'loading', progress: 0.35, text: 'Starting Python interpreter…' });
+
+    try {
+      pyodide = await window.loadPyodide({
+        indexURL,
+        stdout: () => {},  // captured per-run below
+        stderr: () => {},
+      });
+    } catch (err) {
+      post({ type: 'load-error', message: 'Pyodide init failed: ' + (err.message ?? err) });
+      return;
+    }
+
+    post({ type: 'loading', progress: 1.0, text: 'Python ready!' });
+    post({ type: 'ready' });
+    isReady = true;
+
+    // Drain anything queued before we were ready
+    runQueue.forEach(runCode);
+    runQueue.length = 0;
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(s);
+    });
+  }
+
+  // ─── Run ───────────────────────────────────────────────────────────────────
+
+  async function runCode({ code, id }) {
+    if (!isReady) { runQueue.push({ code, id }); return; }
+
+    let stdout = '';
+    let stderr = '';
+    let error  = null;
+
+    // Capture stdout / stderr per-run
+    pyodide.setStdout({ batched: (line) => { stdout += line + '\n'; } });
+    pyodide.setStderr({ batched: (line) => { stderr += line + '\n'; } });
+
+    // Interrupt any previous long-running computation
+    pyodide.setInterruptBuffer(new Int32Array(new SharedArrayBuffer?.(4) ?? new ArrayBuffer(4)));
+
+    try {
+      await pyodide.runPythonAsync(code);
+    } catch (err) {
+      error = String(err.message ?? err);
+    }
+
+    post({
+      type:   'result',
+      id,
+      stdout: stdout.trimEnd(),
+      stderr: stderr.trimEnd(),
+      error,
+    });
+  }
+
+  // ─── Message bridge ─────────────────────────────────────────────────────────
+
+  window.addEventListener('message', (e) => {
+    const msg = e.data;
+    if (!msg || typeof msg !== 'object') return;
+    if (msg.type === 'run') runCode(msg);
+  });
+
+  function post(msg) {
+    try { window.parent.postMessage(msg, '*'); } catch (_) {}
+  }
+
+  // ─── Boot ───────────────────────────────────────────────────────────────────
+
+  init().catch((err) => {
+    post({ type: 'load-error', message: 'Unexpected error: ' + (err?.message ?? err) });
+  });
+  </script>
+</head>
+<body></body>
+</html>

@@ -43,21 +43,55 @@ export async function renderHome(container) {
 
   const progressMap = new Map(allProgress.map((p) => [p.lessonId, p]));
 
+  const completedCount = [...progressMap.values()].filter(p => p.status === 'completed').length;
+
   container.innerHTML = `
     <div class="page-header">
       <h1>Learn to Code</h1>
-      <p>13 lessons — from zero to writing real programs. No internet needed.</p>
+      <p>13 Python lessons — from zero to writing real programs. Works offline.</p>
+    </div>
+    ${completedCount > 0 ? `
+    <div class="home-stats-bar">
+      <span>${completedCount} / ${index.length} lessons completed</span>
+      <a href="#stats" class="btn btn-ghost btn-sm">View progress →</a>
+    </div>` : ''}
+    <div class="home-search-wrap">
+      <input
+        type="search"
+        id="lesson-search"
+        placeholder="Search lessons…"
+        aria-label="Search lessons"
+        class="lesson-search-input"
+      >
     </div>
     <div class="lesson-grid" id="lesson-grid"></div>
+    <p id="no-results" hidden style="color:var(--text-muted);text-align:center;margin-top:32px">No lessons match your search.</p>
   `;
 
   const grid = container.querySelector('#lesson-grid');
+  const cards = [];
 
   index.forEach((lesson) => {
     const progress = progressMap.get(lesson.id);
     const status   = progress?.status ?? 'not-started';
     const card     = buildLessonCard(lesson, status, progress);
     grid.appendChild(card);
+    cards.push({ card, lesson });
+  });
+
+  // Live search filter
+  container.querySelector('#lesson-search')?.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(({ card, lesson }) => {
+      const match = !q ||
+        lesson.title.toLowerCase().includes(q) ||
+        lesson.description.toLowerCase().includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    const noResults = container.querySelector('#no-results');
+    if (noResults) noResults.hidden = visible > 0;
   });
 }
 
@@ -363,6 +397,7 @@ function renderQuizSection(section) {
 }
 
 function renderExerciseSection(section) {
+  const starter = section.starterCode ?? '';
   return `
     <div class="section-exercise">
       <div class="exercise-label">
@@ -375,19 +410,32 @@ function renderExerciseSection(section) {
       <p class="exercise-prompt">${escapeHtml(section.prompt)}</p>
       <div class="exercise-editor-wrap">
         <div class="exercise-toolbar">
-          <button class="btn btn-primary btn-sm exercise-run">▶ Run (Ctrl+Enter)</button>
+          <button class="btn btn-primary btn-sm exercise-run">▶ Run</button>
           <button class="btn btn-secondary btn-sm exercise-reset">Reset</button>
           ${section.hint ? `<button class="btn btn-ghost btn-sm exercise-hint-btn">Show hint</button>` : ''}
           <span class="run-hint" aria-hidden="true">Ctrl+Enter to run</span>
+          <div class="pyodide-loader" aria-live="polite">
+            <div class="pyodide-progress"><div class="pyodide-progress-fill"></div></div>
+            <span class="pyodide-load-text">Loading Python…</span>
+          </div>
         </div>
-        <div class="exercise-editor">
-          <textarea class="exercise-textarea" spellcheck="false" aria-label="Code editor">${escapeHtml(section.starterCode ?? '')}</textarea>
+        <!-- .exercise-host: CM6 attaches here; hidden textarea is the fallback -->
+        <div class="exercise-host" data-starter="${escapeAttr(starter)}">
+          <textarea class="exercise-textarea" spellcheck="false" aria-label="Code editor">${escapeHtml(starter)}</textarea>
         </div>
         <div class="exercise-output" role="log" aria-live="polite" aria-label="Output"></div>
       </div>
       ${section.hint ? `
         <div class="hint-section">
           <div class="hint-text" role="note">${escapeHtml(section.hint)}</div>
+        </div>` : ''}
+      ${section.solution ? `
+        <div class="solution-section">
+          <button class="btn btn-ghost btn-sm exercise-solution-btn">Show solution (after 3 attempts)</button>
+          <div class="solution-text">
+            <strong>Solution:</strong>
+            <pre><code>${highlightPython(escapeHtml(section.solution))}</code></pre>
+          </div>
         </div>` : ''}
     </div>
     ${buildSectionNavPlaceholder()}
@@ -446,7 +494,7 @@ function bindSectionEvents(wrapper, section, lessonId, onQuizAttempt, onQuizResu
   }
 
   // Exercise: hint reveal
-  const hintBtn = wrapper.querySelector('.exercise-hint-btn');
+  const hintBtn  = wrapper.querySelector('.exercise-hint-btn');
   const hintText = wrapper.querySelector('.hint-text');
   if (hintBtn && hintText) {
     hintBtn.addEventListener('click', () => {
@@ -455,46 +503,88 @@ function bindSectionEvents(wrapper, section, lessonId, onQuizAttempt, onQuizResu
     });
   }
 
-  // Exercise: reset
-  const resetBtn  = wrapper.querySelector('.exercise-reset');
-  const textarea  = wrapper.querySelector('.exercise-textarea');
-  if (resetBtn && textarea) {
-    const starter = section.starterCode ?? '';
-    resetBtn.addEventListener('click', () => {
-      textarea.value = starter;
+  // Exercise: solution reveal (after 3 attempts)
+  let attempts = 0;
+  const solutionBtn  = wrapper.querySelector('.exercise-solution-btn');
+  const solutionText = wrapper.querySelector('.solution-text');
+  if (solutionBtn && solutionText) {
+    solutionBtn.style.display = 'none'; // hidden until 3 attempts
+    solutionBtn.addEventListener('click', () => {
+      solutionText.classList.toggle('show');
+      solutionBtn.textContent = solutionText.classList.contains('show') ? 'Hide solution' : 'Show solution';
     });
   }
 
-  // Exercise: run (basic — Pyodide integration happens in Phase 2)
-  const runBtn    = wrapper.querySelector('.exercise-run');
-  const outputEl  = wrapper.querySelector('.exercise-output');
-  if (runBtn && textarea && outputEl) {
+  // Exercise: reset
+  const resetBtn = wrapper.querySelector('.exercise-reset');
+  const hostEl   = wrapper.querySelector('.exercise-host');
+  const textarea = wrapper.querySelector('.exercise-textarea');
+  if (resetBtn) {
+    const starter = section.starterCode ?? '';
+    resetBtn.addEventListener('click', () => {
+      // Reset CM6 if available (editor.js sets _editorView on the host element)
+      if (hostEl?._editorView && window.CMEditor) {
+        window.CMEditor.setEditorContent(hostEl._editorView, starter);
+      } else if (textarea) {
+        textarea.value = starter;
+      }
+    });
+  }
+
+  // Exercise: run — uses Pyodide sandbox via window._runPythonCode (set by editor.js)
+  const runBtn  = wrapper.querySelector('.exercise-run');
+  const outputEl = wrapper.querySelector('.exercise-output');
+  if (runBtn && outputEl) {
     async function runCode() {
       recordExerciseAttempt(lessonId);
+      attempts++;
+
+      // Unlock solution button after 3 attempts
+      if (solutionBtn && attempts >= 3) solutionBtn.style.display = '';
+
+      // Read code from CM6 or fallback textarea
+      const code = (hostEl?._editorView && window.CMEditor)
+        ? window.CMEditor.getEditorContent(hostEl._editorView)
+        : (textarea?.value ?? '');
+
+      if (!code.trim()) return;
+
       outputEl.textContent = '';
       outputEl.className   = 'exercise-output';
 
-      if (window.pyodide) {
-        try {
-          let stdout = '';
-          window.pyodide.setStdout({ batched: (s) => { stdout += s + '\n'; } });
-          await window.pyodide.runPythonAsync(textarea.value);
-          outputEl.textContent = stdout.trim() || '(no output)';
-        } catch (err) {
-          outputEl.textContent = err.message;
+      if (typeof window._runPythonCode === 'function') {
+        runBtn.disabled = true;
+        runBtn.textContent = '⏳ Running…';
+        outputEl.textContent = '';
+
+        const result = await window._runPythonCode(code);
+
+        runBtn.disabled = false;
+        runBtn.textContent = '▶ Run';
+
+        if (result.error) {
+          outputEl.textContent = result.error;
           outputEl.classList.add('output-error');
+        } else {
+          const out = [result.stdout, result.stderr ? '⚠ stderr:\n' + result.stderr : ''].filter(Boolean).join('\n');
+          outputEl.textContent = out || '(no output)';
+          if (result.stderr) outputEl.classList.add('output-warning');
         }
       } else {
-        outputEl.innerHTML = `<span class="output-error">Python runner not loaded yet.</span>\n` +
-          `<span style="color:var(--text-faint);font-size:12px">Pyodide will be available in Phase 2. ` +
-          `Connect to Wi-Fi once to download it, then it works offline.</span>`;
+        // Pyodide still loading — show a helpful message
+        const state = window._pyodideState?.value;
+        if (state === 'loading') {
+          outputEl.innerHTML = `<span style="color:var(--accent)">⏳ Python is still loading — try again in a moment.</span>`;
+        } else {
+          outputEl.innerHTML =
+            `<span class="output-error">Python runtime not available.</span>\n` +
+            `<span style="color:var(--text-faint);font-size:12px">` +
+            `Connect to the internet once to download it (~10 MB), then it works offline.</span>`;
+        }
       }
     }
 
     runBtn.addEventListener('click', runCode);
-    textarea.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && e.ctrlKey) { e.preventDefault(); runCode(); }
-    });
   }
 }
 

@@ -405,7 +405,7 @@
 .output-success { color: var(--success); }
 
 /* Hint / solution reveal */
-.hint-section {
+.hint-section, .solution-section {
   margin-top: 12px;
 }
 .hint-text, .solution-text {
@@ -426,6 +426,63 @@
   margin-top: 8px;
   font-size: 13px;
   overflow-x: auto;
+}
+
+/* Pyodide loader (inline in exercise toolbar) */
+.pyodide-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  max-width: 200px;
+}
+.pyodide-loader.pyodide-loader--ready { display: none; }
+.pyodide-progress {
+  width: 60px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.pyodide-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.pyodide-load-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Exercise host (CM6 attaches here) */
+.exercise-host {
+  background: var(--code-bg);
+  min-height: 130px;
+  position: relative;
+}
+.exercise-host .cm-host {
+  min-height: 130px;
+}
+
+/* Output: warning state (stderr without fatal error) */
+.exercise-output.output-warning {
+  color: var(--warning);
+}
+
+/* Smooth fade for page transitions */
+#main-content {
+  animation: fadeIn 0.18s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ─── Lesson complete banner ────────────────────────────────────────────────── */

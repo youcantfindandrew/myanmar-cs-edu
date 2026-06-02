@@ -435,6 +435,37 @@ code, kbd, pre { font-family: var(--font-mono); }
 #offline-notice-close:hover { color: var(--text-primary); border-color: var(--border-light); }
 #offline-notice[hidden] { display: none; }
 
+/* ─── Home: stats bar + search ──────────────────────────────────────────────── */
+.home-stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.home-search-wrap {
+  margin-bottom: 20px;
+}
+.lesson-search-input {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+.lesson-search-input:focus { outline: none; border-color: var(--accent); }
+.lesson-search-input::placeholder { color: var(--text-faint); }
+
 /* ─── About page ─────────────────────────────────────────────────────────────── */
 .about-content {
   max-width: var(--content-w);

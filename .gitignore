@@ -17,5 +17,11 @@ model/*.onnx
 # Pyodide bundle (too large — download separately)
 pyodide/
 
+# Build tooling (dev-time only, not shipped)
+_build/
+node_modules/
+package.json
+package-lock.json
+
 # Generated
 *.log

@@ -10,9 +10,15 @@
 import { Router }      from './router.js';
 import { renderHome, renderLesson } from './lessons.js';
 import { renderStats } from './stats.js';
-import { initEditors } from './editor.js';
+import { initEditors, initPyodide, installGlobals } from './editor.js';
 import { mountTutor, cleanup as cleanupTutor } from './tutor.js';
 import { getStudent }  from './db.js';
+
+// Boot Pyodide sandbox in the background immediately so it's ready when
+// a student opens their first exercise. installGlobals() wires up
+// window._runPythonCode which bindSectionEvents reads lazily.
+installGlobals();
+initPyodide();
 
 // ─── Service worker registration ─────────────────────────────────────────────
 
@@ -37,7 +43,8 @@ function showOfflineNotice() {
 }
 
 if (localStorage.getItem('offline-notice-dismissed') === '1') {
-  document.getElementById('offline-notice').hidden = true;
+  const notice = document.getElementById('offline-notice');
+  if (notice) notice.hidden = true;
 }
 
 // ─── Mobile nav ───────────────────────────────────────────────────────────────
