@@ -1,0 +1,46 @@
+/* ─── Code editor panel (CodeMirror 6 integration — Phase 2) ──────────────── */
+
+/* Pyodide loading indicator */
+.pyodide-loader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  background: var(--code-bg);
+}
+.pyodide-progress {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.pyodide-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+/* CodeMirror theme overrides — applied once CM6 is loaded in Phase 2 */
+.cm-editor {
+  font-family: var(--font-mono) !important;
+  font-size: 14px !important;
+  background: var(--code-bg) !important;
+  height: 100%;
+}
+.cm-editor .cm-scroller { overflow: auto; }
+.cm-editor.cm-focused { outline: none; }
+.cm-editor .cm-gutters {
+  background: var(--code-bg);
+  border-right: 1px solid var(--border);
+  color: var(--text-faint);
+}
+.cm-editor .cm-activeLineGutter { background: rgba(255,255,255,0.04); }
+.cm-editor .cm-activeLine      { background: rgba(255,255,255,0.03); }
+.cm-editor .cm-cursor          { border-left-color: var(--accent); }
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground { background: rgba(245,166,35,0.18); }

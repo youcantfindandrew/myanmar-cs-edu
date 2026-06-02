@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Model files (too large for git — see model/README.md)
+model/phi-3-mini/
+model/*.gguf
+model/*.bin
+model/*.onnx
+
+# Pyodide bundle (too large — download separately)
+pyodide/
+
+# Generated
+*.log

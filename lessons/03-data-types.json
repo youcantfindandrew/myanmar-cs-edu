@@ -1,0 +1,57 @@
+{
+  "id": "03-data-types",
+  "title": "Data Types — Numbers, Text, and More",
+  "description": "Understand the different kinds of data Python works with.",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Not all data is the same. The number 5 and the word \"five\" are very different things to a computer.\n\nPython has different types of data, called data types. The three most important ones to start with are:\n\n- `int` — whole numbers like 1, 42, -7\n- `float` — decimal numbers like 3.14, 0.5, -1.25\n- `str` — text (string) like \"hello\", \"Myanmar\", \"123\""
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "whole_number = 42          # int\ndecimal_number = 3.14      # float\nsome_text = \"Hello\"        # str\n\nprint(type(whole_number))   # <class 'int'>\nprint(type(decimal_number)) # <class 'float'>\nprint(type(some_text))      # <class 'str'>",
+      "explanation": "type() tells you the data type of any value. The # symbol starts a comment — Python ignores it. Comments are notes for humans reading the code."
+    },
+    {
+      "type": "text",
+      "content": "Why does this matter? Because you can do different things with different types.\n\nYou can add two numbers: `5 + 3` gives `8`.\nBut if you add two strings: `\"5\" + \"3\"` gives `\"53\"` — it joins them together, not adds them!\n\nThis is called concatenation when it happens with text."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# Numbers: addition\nprint(5 + 3)     # 8\n\n# Strings: joining\nprint(\"5\" + \"3\") # 53\n\n# Strings: joining words\nfirst = \"Hello\"\nsecond = \"World\"\nprint(first + \" \" + second)  # Hello World",
+      "explanation": "Notice that 5 + 3 = 8 (math), but \"5\" + \"3\" = \"53\" (text joining). The quotes make all the difference."
+    },
+    {
+      "type": "quiz",
+      "question": "What will this code print?\nprint(\"10\" + \"20\")",
+      "options": [
+        "30",
+        "1020",
+        "10 20",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "Both values are strings (they have quotes). Adding strings joins them together, so \"10\" + \"20\" gives \"1020\", not 30."
+    },
+    {
+      "type": "text",
+      "content": "You can convert between types using these functions:\n\n- `int(\"5\")` converts the string \"5\" to the number 5\n- `float(\"3.14\")` converts \"3.14\" to 3.14\n- `str(42)` converts the number 42 to the string \"42\""
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "text_number = \"25\"\nreal_number = int(text_number)\n\nresult = real_number + 10\nprint(result)   # 35\nprint(str(result) + \" students\")  # 35 students",
+      "explanation": "int() converts text to a number so you can do math. str() converts a number back to text so you can join it with other text."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Create a variable called price with a number value. Then print a sentence that says: \"The price is: \" followed by the price. (Hint: you will need to convert the number to a string.)",
+      "starterCode": "price = 500\n# Print: The price is: 500\n",
+      "hint": "Use str(price) to convert the number to text, then join it with + to the rest of the sentence.",
+      "solution": "price = 500\nprint(\"The price is: \" + str(price))"
+    }
+  ]
+}

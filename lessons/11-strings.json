@@ -1,0 +1,49 @@
+{
+  "id": "11-strings",
+  "title": "Strings — Working With Text",
+  "description": "Manipulate and analyse text with Python's powerful string tools.",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Strings are sequences of characters. Python has many built-in tools for working with them. You can count characters, convert case, search inside text, and split it into pieces."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "message = \"Hello, Myanmar!\"\n\nprint(len(message))           # 15 — number of characters\nprint(message.upper())        # HELLO, MYANMAR!\nprint(message.lower())        # hello, myanmar!\nprint(message.replace(\"Hello\", \"Mingalaba\"))  # Mingalaba, Myanmar!",
+      "explanation": "String methods are called with a dot after the variable name. upper() and lower() change the case. replace() swaps one piece of text for another. These all return new strings — the original is unchanged."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "sentence = \"Python is fun to learn\"\n\nprint(sentence.split())          # ['Python', 'is', 'fun', 'to', 'learn']\nprint(sentence.split(\"to\"))      # ['Python is fun ', ' learn']\n\nwords = sentence.split()\nprint(len(words))                # 5 — number of words",
+      "explanation": "split() breaks a string into a list of parts. With no argument, it splits on spaces. With an argument, it splits on that specific text."
+    },
+    {
+      "type": "quiz",
+      "question": "What will this print?\nname = \"  khin myo  \"\nprint(name.strip().title())",
+      "options": [
+        "  khin myo  ",
+        "khin myo",
+        "Khin Myo",
+        "KHIN MYO"
+      ],
+      "correct": 2,
+      "explanation": "strip() removes leading and trailing spaces. title() capitalises the first letter of each word. Together: 'Khin Myo'."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# Slicing — getting part of a string\ntext = \"Hello, World!\"\n\nprint(text[0:5])   # Hello   (characters 0 to 4)\nprint(text[7:])    # World!  (from index 7 to end)\nprint(text[:5])    # Hello   (from start to index 4)\nprint(text[-6:])   # World!  (last 6 characters)",
+      "explanation": "text[start:end] gives you a slice of the string. The end index is not included. Negative indices count from the end: -1 is the last character."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Write a program that takes a full name from the user and prints:\n1. The name in all capitals\n2. The number of characters in the name (not counting spaces)\n3. The initials (first letter of each word)",
+      "starterCode": "name = input(\"Enter your full name: \")\n\n# 1. Print in capitals\n\n# 2. Print number of characters (not counting spaces)\n\n# 3. Print initials (first letter of each word)\n",
+      "hint": "For initials: split the name into words, then for each word take word[0].",
+      "solution": "name = input(\"Enter your full name: \")\n\n# 1. Capitals\nprint(name.upper())\n\n# 2. Characters without spaces\nno_spaces = name.replace(\" \", \"\")\nprint(len(no_spaces))\n\n# 3. Initials\nwords = name.split()\ninitials = \"\"\nfor word in words:\n    initials += word[0].upper()\nprint(initials)"
+    }
+  ]
+}

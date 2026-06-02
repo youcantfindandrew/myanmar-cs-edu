@@ -1,0 +1,48 @@
+{
+  "id": "12-dictionaries",
+  "title": "Dictionaries — Labelled Storage",
+  "description": "Store and look up data using keys, like a real-world dictionary.",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "A list stores items in order using numbers (index 0, 1, 2...). But sometimes you want to label your data with meaningful names.\n\nA dictionary stores data as key-value pairs. You look things up by name, not by position. Think of a real dictionary: you look up a word (the key) and get its definition (the value)."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "student = {\n    \"name\": \"Ma Thida\",\n    \"age\": 16,\n    \"city\": \"Yangon\",\n    \"grade\": \"A\"\n}\n\nprint(student[\"name\"])   # Ma Thida\nprint(student[\"age\"])    # 16\nprint(student[\"grade\"])  # A",
+      "explanation": "Dictionaries use curly braces {}. Each item is a key: value pair, separated by commas. You access values using the key in square brackets."
+    },
+    {
+      "type": "text",
+      "content": "You can add, update, and remove entries from a dictionary after creating it."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "person = {\"name\": \"Aung\", \"age\": 20}\n\n# Add a new key\nperson[\"city\"] = \"Mandalay\"\n\n# Update an existing key\nperson[\"age\"] = 21\n\n# Remove a key\ndel person[\"city\"]\n\nprint(person)  # {'name': 'Aung', 'age': 21}",
+      "explanation": "Use square brackets to add or update. del removes a key-value pair. If you try to access a key that does not exist, Python raises a KeyError."
+    },
+    {
+      "type": "quiz",
+      "question": "What will this print?\nscores = {\"Aung\": 85, \"Myo\": 72, \"Kyaw\": 90}\nprint(scores[\"Myo\"])",
+      "options": ["85", "72", "90", "Myo"],
+      "correct": 1,
+      "explanation": "scores[\"Myo\"] looks up the value associated with the key \"Myo\", which is 72."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "scores = {\"Aung\": 85, \"Myo\": 72, \"Kyaw\": 90}\n\n# Loop through all keys\nfor name in scores:\n    print(f\"{name}: {scores[name]}\")\n\n# Loop through key-value pairs at once\nfor name, score in scores.items():\n    print(f\"{name} scored {score}\")",
+      "explanation": "Looping over a dictionary gives you the keys. .items() gives you both key and value together as pairs — very useful for displaying all data."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Create a dictionary of 5 cities and their populations. Then:\n1. Print all city names and populations\n2. Find and print the city with the largest population",
+      "starterCode": "cities = {\n    \"Yangon\": 7400000,\n    \"Mandalay\": 1200000,\n    \"Naypyidaw\": 925000,\n    \"Mawlamyine\": 490000,\n    \"Taunggyi\": 390000\n}\n\n# 1. Print all cities and populations\n\n# 2. Find the city with the largest population\n",
+      "hint": "For the largest: start with largest_city = None and largest_pop = 0. Loop through cities.items() and update when you find a bigger population.",
+      "solution": "cities = {\n    \"Yangon\": 7400000,\n    \"Mandalay\": 1200000,\n    \"Naypyidaw\": 925000,\n    \"Mawlamyine\": 490000,\n    \"Taunggyi\": 390000\n}\n\n# 1. Print all\nfor city, population in cities.items():\n    print(f\"{city}: {population:,}\")\n\n# 2. Largest\nlargest_city = None\nlargest_pop = 0\nfor city, population in cities.items():\n    if population > largest_pop:\n        largest_pop = population\n        largest_city = city\n\nprint(f\"\\nLargest city: {largest_city} ({largest_pop:,})\")"
+    }
+  ]
+}

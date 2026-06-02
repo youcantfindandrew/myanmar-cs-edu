@@ -1,0 +1,45 @@
+{
+  "id": "01-what-is-code",
+  "title": "What Is Code?",
+  "description": "Discover what programming actually is and write your very first Python line.",
+  "estimatedMinutes": 15,
+  "sections": [
+    {
+      "type": "text",
+      "content": "A computer is very fast — but it is also very dumb. It only does exactly what you tell it to do. Nothing more, nothing less.\n\nCode is how you give instructions to a computer. Just like you might write a recipe for making tea, a program is a recipe for a computer to follow."
+    },
+    {
+      "type": "text",
+      "content": "There are many programming languages — Java, C, JavaScript, and more. We are going to learn Python.\n\nPython is one of the most popular languages in the world. Scientists, teachers, companies, and beginners all use it. Its code looks almost like English, which makes it great for learning."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "print(\"Hello, world!\")",
+      "explanation": "This is a complete Python program. It tells the computer: print the words 'Hello, world!' on the screen. The word print is a command. The words in quotes are the message."
+    },
+    {
+      "type": "quiz",
+      "question": "What does the print() command do?",
+      "options": [
+        "It prints a document on a printer",
+        "It shows a message on the screen",
+        "It saves a file",
+        "It turns the computer off"
+      ],
+      "correct": 1,
+      "explanation": "print() shows text on the screen — it is the most common way to display output in Python."
+    },
+    {
+      "type": "text",
+      "content": "When you write code, the computer reads it from top to bottom, one line at a time. The order matters.\n\nRight now, try changing the message inside the quotes and running the code again. You are already a programmer!"
+    },
+    {
+      "type": "exercise",
+      "prompt": "Change the message so it prints your name. For example: Hello, Aung Aung!",
+      "starterCode": "print(\"Hello, world!\")\n",
+      "hint": "Change the words inside the quotes. Keep the quotes there — they are important.",
+      "solution": "print(\"Hello, Aung Aung!\")"
+    }
+  ]
+}

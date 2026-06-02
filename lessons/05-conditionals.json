@@ -1,0 +1,57 @@
+{
+  "id": "05-conditionals",
+  "title": "Conditionals — Making Decisions",
+  "description": "Teach your program to choose different actions based on conditions.",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Every useful program makes decisions. A traffic light decides when to turn green. A game decides if you won or lost.\n\nIn Python, you make decisions with `if`, `elif`, and `else`."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "temperature = 35\n\nif temperature > 30:\n    print(\"It is hot today.\")\nelse:\n    print(\"The weather is fine.\")",
+      "explanation": "if checks a condition. If the condition is True, it runs the indented code below it. else runs when the condition is False. The indentation (4 spaces) is required — Python uses it to know which code belongs inside the if."
+    },
+    {
+      "type": "text",
+      "content": "Comparison operators let you compare values:\n\n- `>` greater than\n- `<` less than\n- `>=` greater than or equal to\n- `<=` less than or equal to\n- `==` equal to (two equals signs — one = means assign!)\n- `!=` not equal to"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "score = 75\n\nif score >= 80:\n    print(\"Excellent!\")\nelif score >= 60:\n    print(\"Good job.\")\nelse:\n    print(\"Keep practising.\")",
+      "explanation": "elif means 'else if'. Python checks each condition in order and runs the first one that is True. The rest are skipped. This lets you handle multiple cases."
+    },
+    {
+      "type": "quiz",
+      "question": "What will this code print?\nscore = 55\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+      "options": [
+        "Pass",
+        "Fail",
+        "Nothing",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "55 is not >= 60, so the if condition is False. Python runs the else block instead and prints 'Fail'."
+    },
+    {
+      "type": "text",
+      "content": "You can combine conditions using `and` and `or`:\n\n- `and` — both conditions must be True\n- `or` — at least one condition must be True\n- `not` — flips True to False and False to True"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "age = 16\nhas_permission = True\n\nif age >= 13 and has_permission:\n    print(\"You can use this app.\")\nelse:\n    print(\"Access denied.\")",
+      "explanation": "Both conditions must be True for 'and' to give True. age >= 13 is True and has_permission is True, so the message is printed."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Write a program that asks for a number and prints whether it is positive, negative, or zero.",
+      "starterCode": "number = int(input(\"Enter a number: \"))\n# Check if it is positive, negative, or zero\n",
+      "hint": "Use if number > 0, elif number < 0, and else for zero.",
+      "solution": "number = int(input(\"Enter a number: \"))\nif number > 0:\n    print(\"Positive\")\nelif number < 0:\n    print(\"Negative\")\nelse:\n    print(\"Zero\")"
+    }
+  ]
+}

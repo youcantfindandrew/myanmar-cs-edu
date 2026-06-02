@@ -1,0 +1,52 @@
+{
+  "id": "06-loops",
+  "title": "Loops — Making the Computer Repeat Itself",
+  "description": "Learn how to make Python run the same code many times without copy-pasting.",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Imagine you want to print 'Hello' 100 times. You could write print('Hello') 100 times... or you could use a loop.\n\nA loop tells Python: run this block of code again and again until I say stop."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "for i in range(5):\n    print(\"Hello\", i)",
+      "explanation": "This loop runs 5 times. Each time, i is a different number: 0, 1, 2, 3, 4. range(5) gives you a sequence from 0 up to (but not including) 5."
+    },
+    {
+      "type": "quiz",
+      "question": "How many times will this loop print something?\nfor i in range(3):\n    print(\"hi\")",
+      "options": ["1", "2", "3", "4"],
+      "correct": 2,
+      "explanation": "range(3) gives you 0, 1, 2 — three numbers, so the loop runs three times."
+    },
+    {
+      "type": "text",
+      "content": "You can also loop over the items in a list directly. The variable after `for` takes each value one at a time."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "cities = [\"Yangon\", \"Mandalay\", \"Naypyidaw\"]\n\nfor city in cities:\n    print(\"City:\", city)",
+      "explanation": "For each loop, city is one item from the list. First it is 'Yangon', then 'Mandalay', then 'Naypyidaw'."
+    },
+    {
+      "type": "text",
+      "content": "A `while` loop keeps running as long as a condition is True. Be careful — if the condition never becomes False, the loop runs forever!"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "count = 0\nwhile count < 5:\n    print(\"Count:\", count)\n    count = count + 1\nprint(\"Done!\")",
+      "explanation": "The loop checks: is count < 5? If yes, it runs the block. After the block, count increases by 1. When count reaches 5, the condition is False and the loop stops."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Write a loop that prints the numbers 1 through 10.",
+      "starterCode": "# Your code here\n",
+      "hint": "range(1, 11) gives you numbers starting at 1 and stopping before 11.",
+      "solution": "for i in range(1, 11):\n    print(i)"
+    }
+  ]
+}

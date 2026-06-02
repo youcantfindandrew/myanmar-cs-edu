@@ -1,0 +1,57 @@
+{
+  "id": "04-input-output",
+  "title": "Input & Output — Talking to the User",
+  "description": "Make programs that ask questions and show answers.",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "So far, all our programs have used fixed values — we wrote the data directly in the code. Real programs talk to the user: they ask questions and respond to answers.\n\nIn Python, `input()` pauses the program and waits for the user to type something. Whatever the user types is returned as a string."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "name = input(\"What is your name? \")\nprint(\"Hello, \" + name + \"!\")",
+      "explanation": "input() shows the question in the brackets, then waits. The user types their answer and presses Enter. Their answer is stored in name and used in print()."
+    },
+    {
+      "type": "text",
+      "content": "Remember: `input()` always returns a string — even if the user types a number.\n\nIf you want to do math with user input, you must convert it first using `int()` or `float()`."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "age_text = input(\"How old are you? \")\nage = int(age_text)        # convert to number\nnext_year = age + 1\nprint(\"Next year you will be \" + str(next_year))",
+      "explanation": "Step 1: get the input (always a string). Step 2: convert it to int. Step 3: do math. Step 4: convert back to string for printing."
+    },
+    {
+      "type": "quiz",
+      "question": "What type does input() always return?",
+      "options": [
+        "int",
+        "float",
+        "str",
+        "It depends on what the user types"
+      ],
+      "correct": 2,
+      "explanation": "input() always returns a str (string), no matter what the user types. You must convert it yourself if you need a number."
+    },
+    {
+      "type": "text",
+      "content": "You can also print formatted messages using an f-string. An f-string starts with the letter `f` before the quotes. Inside, you put variable names in curly braces `{}` and Python fills them in automatically."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "name = \"Htike\"\nage = 17\ncity = \"Mandalay\"\n\nprint(f\"My name is {name}. I am {age} years old and I live in {city}.\")",
+      "explanation": "f-strings are easier than using + to join everything. Python replaces {name}, {age}, {city} with the actual values."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Write a program that asks for the user's name and age. Then print: \"[name] is [age] years old and will be [age+1] next year.\" Use an f-string.",
+      "starterCode": "# Ask for name\n# Ask for age (remember to convert!)\n# Print the sentence\n",
+      "hint": "name = input(\"...\")  then  age = int(input(\"...\"))  then  print(f\"...{name}...{age}...{age+1}...\")",
+      "solution": "name = input(\"What is your name? \")\nage = int(input(\"How old are you? \"))\nprint(f\"{name} is {age} years old and will be {age + 1} next year.\")"
+    }
+  ]
+}

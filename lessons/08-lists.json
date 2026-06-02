@@ -1,0 +1,52 @@
+{
+  "id": "08-lists",
+  "title": "Lists — Groups of Things",
+  "description": "Store multiple values together and work with collections of data.",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "So far, each variable has held one value. But what if you need to store 30 student names? You would not want 30 variables.\n\nA list lets you store multiple values in one place, in order."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "students = [\"Aung\", \"Myo\", \"Kyaw\", \"Nwe\"]\nprint(students)          # the whole list\nprint(students[0])       # 'Aung' — first item\nprint(students[2])       # 'Kyaw' — third item\nprint(len(students))     # 4 — number of items",
+      "explanation": "Lists use square brackets. Items are separated by commas. Counting starts from 0 — so the first item is at index 0, the second at index 1, and so on. len() gives you the total number of items."
+    },
+    {
+      "type": "quiz",
+      "question": "What will this print?\ncolours = [\"red\", \"green\", \"blue\"]\nprint(colours[1])",
+      "options": ["red", "green", "blue", "An error"],
+      "correct": 1,
+      "explanation": "Index 1 is the second item. Counting starts at 0, so index 0 = 'red', index 1 = 'green'."
+    },
+    {
+      "type": "text",
+      "content": "You can change, add, and remove items from a list."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "fruits = [\"apple\", \"banana\"]\n\nfruits.append(\"mango\")   # add to end\nprint(fruits)            # ['apple', 'banana', 'mango']\n\nfruits[0] = \"grape\"      # change first item\nprint(fruits)            # ['grape', 'banana', 'mango']\n\nfruits.remove(\"banana\")  # remove by value\nprint(fruits)            # ['grape', 'mango']",
+      "explanation": "append() adds an item to the end. You can change an item by using its index. remove() deletes the first item that matches the value you give it."
+    },
+    {
+      "type": "text",
+      "content": "Combining lists and loops is very powerful. You can process every item in a list with just a few lines."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "scores = [85, 72, 91, 64, 88]\n\ntotal = 0\nfor score in scores:\n    total = total + score\n\naverage = total / len(scores)\nprint(f\"Average score: {average}\")",
+      "explanation": "The loop adds up every number in scores. Then we divide by the number of scores to get the average. This works no matter how many scores are in the list."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Create a list of 5 numbers. Use a loop to find and print the largest number in the list. (Do not use the max() function — find it yourself with a loop.)",
+      "starterCode": "numbers = [34, 78, 12, 56, 90]\n\n# Your code here\n",
+      "hint": "Start with largest = numbers[0]. Then loop through numbers and check: if the current number is bigger than largest, update largest.",
+      "solution": "numbers = [34, 78, 12, 56, 90]\n\nlargest = numbers[0]\nfor n in numbers:\n    if n > largest:\n        largest = n\n\nprint(\"Largest:\", largest)"
+    }
+  ]
+}

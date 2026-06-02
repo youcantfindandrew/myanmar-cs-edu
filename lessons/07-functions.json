@@ -1,0 +1,52 @@
+{
+  "id": "07-functions",
+  "title": "Functions — Teaching the Computer New Tricks",
+  "description": "Write reusable blocks of code with your own custom functions.",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "You have already used functions — `print()`, `input()`, `int()`. These are functions that Python comes with.\n\nBut you can also write your own functions. A function is a named block of code that you can run whenever you need it, as many times as you want."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def greet():\n    print(\"Hello!\")\n    print(\"Welcome to Code Myanmar.\")\n\ngreet()\ngreet()",
+      "explanation": "def defines a function. The name is greet. The code inside (indented) runs every time you call greet(). Calling it twice prints the message twice — without writing the code twice."
+    },
+    {
+      "type": "text",
+      "content": "Functions become much more useful when you can give them information to work with. These are called parameters (or arguments)."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Aye\")\ngreet(\"Htun\")\ngreet(\"Ko Ko\")",
+      "explanation": "name is a parameter — a variable that the caller fills in. Each call to greet() can use a different name. The function runs the same code but personalises it each time."
+    },
+    {
+      "type": "quiz",
+      "question": "What will this code print?\ndef add(a, b):\n    print(a + b)\n\nadd(3, 4)",
+      "options": ["3", "4", "7", "34"],
+      "correct": 2,
+      "explanation": "a is 3 and b is 4. a + b = 7. The function prints 7."
+    },
+    {
+      "type": "text",
+      "content": "Functions can also send back a result using `return`. This lets you use the function's output in other calculations."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def add(a, b):\n    return a + b\n\nresult = add(10, 5)\nprint(result)           # 15\nprint(add(3, 7))        # 10\nprint(add(2, 2) * 3)    # 12",
+      "explanation": "return sends a value back to whoever called the function. You can store it in a variable, print it directly, or use it in a calculation."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Write a function called square that takes a number and returns that number multiplied by itself. Then call it with a few different numbers.",
+      "starterCode": "def square(number):\n    # return number * number\n    pass\n\nprint(square(4))    # should print 16\nprint(square(7))    # should print 49\n",
+      "hint": "Replace pass with: return number * number",
+      "solution": "def square(number):\n    return number * number\n\nprint(square(4))\nprint(square(7))"
+    }
+  ]
+}

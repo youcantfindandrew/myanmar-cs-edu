@@ -1,0 +1,57 @@
+{
+  "id": "02-variables",
+  "title": "Variables — Giving Things Names",
+  "description": "Learn how to store information so your program can remember it.",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Imagine you are writing a letter. You write the recipient's name at the top so you can use it throughout the letter without writing it out every time.\n\nA variable is like a label on a box. You put something inside the box, give it a name, and later you can use that name to get the thing back out."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "name = \"Khin Myo\"\nage = 16\nprint(name)\nprint(age)",
+      "explanation": "The = sign stores a value into a variable. name now holds the text 'Khin Myo'. age holds the number 16. Later, you just use the variable name — no need to repeat the value."
+    },
+    {
+      "type": "text",
+      "content": "Variable names follow a few rules:\n\n- They can contain letters, numbers, and underscores (_)\n- They cannot start with a number\n- They are case-sensitive: `name` and `Name` are two different variables\n- Spaces are not allowed — use `_` instead: `student_name` is valid, `student name` is not"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "student_name = \"Ma Aye\"\nstudent_age = 15\ncity = \"Yangon\"\n\nprint(\"Name:\", student_name)\nprint(\"Age:\", student_age)\nprint(\"City:\", city)",
+      "explanation": "You can print multiple things with one print() by separating them with commas. Python adds a space between them automatically."
+    },
+    {
+      "type": "quiz",
+      "question": "Which variable name is valid in Python?",
+      "options": [
+        "2names",
+        "student name",
+        "student_name",
+        "student-name"
+      ],
+      "correct": 2,
+      "explanation": "student_name is correct. Variable names cannot start with a number, cannot have spaces, and cannot use hyphens (that means subtraction to Python)."
+    },
+    {
+      "type": "text",
+      "content": "You can also change the value of a variable later. The variable keeps whichever value was assigned last."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "score = 0\nprint(score)   # prints 0\n\nscore = 10\nprint(score)   # prints 10\n\nscore = score + 5\nprint(score)   # prints 15",
+      "explanation": "score = score + 5 means: take the current value of score, add 5, and store the result back into score. This is how you update a value."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Create two variables: your name and your favourite number. Then print both using print().",
+      "starterCode": "# Create a variable called my_name\n# Create a variable called favourite_number\n# Print both\n",
+      "hint": "Use = to assign. Text values go inside quotes. Numbers do not need quotes.",
+      "solution": "my_name = \"Aung\"\nfavourite_number = 7\nprint(my_name)\nprint(favourite_number)"
+    }
+  ]
+}

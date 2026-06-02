@@ -1,0 +1,53 @@
+{
+  "id": "13-final-project",
+  "title": "Final Project — Student Grade Tracker",
+  "description": "Build a complete, useful program that stores and reports student grades.",
+  "estimatedMinutes": 45,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Congratulations — you have made it to the final project.\n\nYou have learned: variables, data types, input/output, conditionals, loops, functions, lists, debugging, strings, and dictionaries.\n\nNow you will build something real: a student grade tracker that a teacher could actually use."
+    },
+    {
+      "type": "text",
+      "content": "The program will:\n- Let the teacher add students and their scores\n- Show all students and scores\n- Calculate the class average\n- Find the top student\n- Let the teacher search for a student by name\n\nThis uses everything you have learned."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# The data structure: a dictionary of name -> list of scores\nstudents = {}\n\ndef add_student(name, score):\n    if name not in students:\n        students[name] = []        # start a new list for this student\n    students[name].append(score)\n\ndef get_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n\ndef get_grade(average):\n    if average >= 90: return \"A\"\n    elif average >= 80: return \"B\"\n    elif average >= 70: return \"C\"\n    elif average >= 60: return \"D\"\n    else: return \"F\"",
+      "explanation": "The core data structure is a dictionary where each key is a student name and each value is a list of their scores. Functions keep the code organised."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def show_all():\n    if len(students) == 0:\n        print(\"No students yet.\")\n        return\n\n    print(\"\\n--- All Students ---\")\n    for name, scores in students.items():\n        avg = get_average(scores)\n        grade = get_grade(avg)\n        print(f\"{name:15} Avg: {avg:.1f}  Grade: {grade}\")\n\ndef show_top_student():\n    if len(students) == 0:\n        print(\"No students yet.\")\n        return\n\n    top_name = None\n    top_avg = -1\n    for name, scores in students.items():\n        avg = get_average(scores)\n        if avg > top_avg:\n            top_avg = avg\n            top_name = name\n    print(f\"\\nTop student: {top_name} with average {top_avg:.1f}\")",
+      "explanation": "show_all() loops through all students and prints a formatted table. show_top_student() finds the highest average using the same pattern as finding the largest number in a list."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def main_menu():\n    while True:\n        print(\"\\n=== Grade Tracker ===\")\n        print(\"1. Add student score\")\n        print(\"2. Show all students\")\n        print(\"3. Show top student\")\n        print(\"4. Search student\")\n        print(\"5. Quit\")\n\n        choice = input(\"Choose: \")\n\n        if choice == \"1\":\n            name  = input(\"Student name: \").strip().title()\n            score = float(input(\"Score (0-100): \"))\n            add_student(name, score)\n            print(f\"Added {name}: {score}\")\n        elif choice == \"2\":\n            show_all()\n        elif choice == \"3\":\n            show_top_student()\n        elif choice == \"4\":\n            name = input(\"Search name: \").strip().title()\n            if name in students:\n                scores = students[name]\n                avg = get_average(scores)\n                print(f\"{name}: scores={scores}, avg={avg:.1f}, grade={get_grade(avg)}\")\n            else:\n                print(f\"{name} not found.\")\n        elif choice == \"5\":\n            print(\"Goodbye!\")\n            break\n        else:\n            print(\"Invalid choice.\")\n\nmain_menu()",
+      "explanation": "The main menu loop ties everything together. .title() formats the name so 'aung aung' becomes 'Aung Aung'. {avg:.1f} formats the number to one decimal place."
+    },
+    {
+      "type": "quiz",
+      "question": "In the grade tracker, why do we store scores as a list (students[name] = []) instead of a single number?",
+      "options": [
+        "Lists are faster than numbers",
+        "So a student can have multiple scores (e.g. for different tests)",
+        "Python requires lists in dictionaries",
+        "It is just a style choice"
+      ],
+      "correct": 1,
+      "explanation": "A list lets you store multiple scores for the same student — perfect for tracking several tests. A single number would get overwritten each time you added a new score."
+    },
+    {
+      "type": "exercise",
+      "prompt": "Build the complete grade tracker. Then add one more feature: a function that shows the class average across all students.",
+      "starterCode": "students = {}\n\ndef add_student(name, score):\n    if name not in students:\n        students[name] = []\n    students[name].append(score)\n\ndef get_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n\ndef get_grade(average):\n    if average >= 90: return \"A\"\n    elif average >= 80: return \"B\"\n    elif average >= 70: return \"C\"\n    elif average >= 60: return \"D\"\n    else: return \"F\"\n\ndef show_all():\n    for name, scores in students.items():\n        avg = get_average(scores)\n        print(f\"{name}: {avg:.1f} ({get_grade(avg)})\")\n\n# Add a show_class_average() function\n\n# Build the main menu loop\n",
+      "hint": "For class average: collect all scores from all students into one list, then calculate the average of that combined list.",
+      "solution": "students = {}\n\ndef add_student(name, score):\n    if name not in students:\n        students[name] = []\n    students[name].append(score)\n\ndef get_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n\ndef get_grade(average):\n    if average >= 90: return \"A\"\n    elif average >= 80: return \"B\"\n    elif average >= 70: return \"C\"\n    elif average >= 60: return \"D\"\n    else: return \"F\"\n\ndef show_all():\n    if len(students) == 0:\n        print(\"No students yet.\"); return\n    for name, scores in students.items():\n        avg = get_average(scores)\n        print(f\"{name}: {avg:.1f} ({get_grade(avg)})\")\n\ndef show_class_average():\n    all_scores = []\n    for scores in students.values():\n        all_scores.extend(scores)\n    if len(all_scores) == 0:\n        print(\"No scores yet.\"); return\n    print(f\"Class average: {get_average(all_scores):.1f}\")\n\nwhile True:\n    print(\"\\n1.Add  2.Show all  3.Class avg  4.Quit\")\n    c = input(\"Choose: \")\n    if c == \"1\":\n        n = input(\"Name: \").strip().title()\n        s = float(input(\"Score: \"))\n        add_student(n, s); print(\"Added.\")\n    elif c == \"2\": show_all()\n    elif c == \"3\": show_class_average()\n    elif c == \"4\": print(\"Goodbye!\"); break\n    else: print(\"Invalid.\")"
+    }
+  ]
+}

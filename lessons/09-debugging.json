@@ -1,0 +1,51 @@
+{
+  "id": "09-debugging",
+  "title": "Debugging — Finding and Fixing Mistakes",
+  "description": "Learn to read error messages and fix broken code like a real programmer.",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Every programmer writes broken code. Even experienced engineers with 20 years of experience make mistakes every day.\n\nDebugging is the skill of finding and fixing those mistakes. It is one of the most important skills in programming."
+    },
+    {
+      "type": "text",
+      "content": "Python gives you error messages to help you. They look scary, but they contain useful information:\n\n- The type of error (e.g. `SyntaxError`, `NameError`, `TypeError`)\n- The line number where the error happened\n- A short description of what went wrong\n\nAlways read the last line of an error message first."
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# SyntaxError — Python cannot understand your code\nprint(\"Hello\"    # missing closing parenthesis\n\n# NameError — you used a variable that does not exist\nprint(mesage)    # typo: should be 'message'\n\n# TypeError — wrong type in an operation\nage = \"16\"\nprint(age + 1)   # can't add string and number",
+      "explanation": "SyntaxError: the code itself is wrong (like a grammar mistake). NameError: you referenced something that doesn't exist — usually a typo. TypeError: you tried to combine incompatible types."
+    },
+    {
+      "type": "quiz",
+      "question": "Your code crashes with: NameError: name 'scroe' is not defined. What is most likely the problem?",
+      "options": [
+        "The computer is too slow",
+        "You made a typo in a variable name",
+        "The number is too large",
+        "Python is not installed correctly"
+      ],
+      "correct": 1,
+      "explanation": "NameError usually means a typo. 'scroe' should probably be 'score'. Check all places where you use that variable name."
+    },
+    {
+      "type": "text",
+      "content": "Three strategies that help with any bug:\n\n1. **Read the error message carefully** — the line number and message tell you where to look\n2. **Print your variables** — add `print(variable)` before the crash to see what value it actually has\n3. **Shrink the problem** — comment out code until you find the line that causes the issue"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# Strategy: print your variables to understand what is happening\n\nname = input(\"Name: \")\nage = input(\"Age: \")   # input returns a string!\n\nprint(\"Debug: name =\", name)\nprint(\"Debug: age =\", age, type(age))  # shows the type!\n\nnext_year = int(age) + 1   # convert before adding\nprint(f\"Next year {name} will be {next_year}\")",
+      "explanation": "Adding print() calls to check your variables is called 'print debugging'. It is simple and it works. You can remove the debug lines once you find the bug."
+    },
+    {
+      "type": "exercise",
+      "prompt": "The code below has a bug. Fix it so it prints the correct average.\n\n(Hint: read the code carefully and think about what type each variable is.)",
+      "starterCode": "score1 = input(\"Score 1: \")\nscore2 = input(\"Score 2: \")\n\n# This line has a bug:\ntotal = score1 + score2\naverage = total / 2\nprint(\"Average:\", average)\n",
+      "hint": "input() always returns a string. You need to convert score1 and score2 to integers before adding them.",
+      "solution": "score1 = int(input(\"Score 1: \"))\nscore2 = int(input(\"Score 2: \"))\n\ntotal = score1 + score2\naverage = total / 2\nprint(\"Average:\", average)"
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+/* ─── AI tutor slide-out panel ──────────────────────────────────────────────── */
+
+.tutor-panel {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  bottom: 0;
+  width: 360px;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 80;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+.tutor-panel.open {
+  transform: translateX(0);
+}
+
+.tutor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.tutor-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tutor-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  transition: background 0.3s;
+}
+.tutor-status-dot.ready    { background: var(--success); }
+.tutor-status-dot.loading  { background: var(--accent); animation: pulse 1.2s infinite; }
+.tutor-status-dot.thinking { background: var(--warning); animation: pulse 0.8s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.tutor-close-btn {
+  color: var(--text-muted);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.tutor-close-btn:hover { color: var(--text-primary); background: var(--surface-2); }
+
+/* Chat area */
+.tutor-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+.tutor-messages::-webkit-scrollbar { width: 4px; }
+.tutor-messages::-webkit-scrollbar-track { background: transparent; }
+.tutor-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.tutor-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.tutor-msg--user {
+  align-self: flex-end;
+  background: var(--accent-glow);
+  border: 1px solid rgba(245,166,35,0.25);
+  color: var(--text-primary);
+  border-radius: var(--radius) var(--radius) 2px var(--radius);
+}
+.tutor-msg--assistant {
+  align-self: flex-start;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius) var(--radius) var(--radius) 2px;
+}
+.tutor-msg code {
+  background: var(--surface);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--accent);
+}
+.tutor-typing {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: 10px 14px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) var(--radius) 2px;
+}
+.tutor-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  animation: typing-bounce 1.2s infinite;
+}
+.tutor-typing span:nth-child(2) { animation-delay: 0.2s; }
+.tutor-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing-bounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
+
+/* Not-ready state — model not loaded */
+.tutor-not-ready {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  gap: 12px;
+}
+.tutor-not-ready-icon { font-size: 40px; opacity: 0.4; }
+.tutor-not-ready h4 {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.tutor-not-ready p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Loading progress */
+.tutor-load-progress {
+  padding: 16px;
+  flex-shrink: 0;
+}
+.tutor-load-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.tutor-load-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s;
+  width: 0%;
+}
+.tutor-load-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* Hint cards (fallback when model unavailable) */
+.hint-cards {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hint-card {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.hint-card-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* Input area */
+.tutor-input-area {
+  border-top: 1px solid var(--border);
+  padding: 12px;
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  background: var(--surface);
+}
+.tutor-input {
+  flex: 1;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  resize: none;
+  max-height: 120px;
+  transition: border-color 0.15s;
+  line-height: 1.5;
+}
+.tutor-input:focus { outline: none; border-color: var(--accent); }
+.tutor-input::placeholder { color: var(--text-faint); }
+.tutor-send-btn {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #0f1117;
+  border-radius: var(--radius);
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.tutor-send-btn:hover:not(:disabled) { background: var(--accent-dim); }
+.tutor-send-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* Tutor FAB (floating action button on lesson page) */
+.tutor-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  background: var(--accent);
+  color: #0f1117;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(245,166,35,0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.tutor-fab:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,166,35,0.5); }
+.tutor-fab:active { transform: scale(0.97); }
+
+@media (max-width: 640px) {
+  .tutor-panel { width: 100%; }
+  .tutor-fab { bottom: 16px; right: 16px; }
+}

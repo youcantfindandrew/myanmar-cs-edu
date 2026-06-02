@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Myanmar</title>
+  <meta name="description" content="Learn programming — fully offline. Designed for students in Myanmar.">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/lessons.css">
+  <link rel="stylesheet" href="css/editor.css">
+  <link rel="stylesheet" href="css/tutor.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <header id="app-header">
+      <a href="#home" class="logo" aria-label="Code Myanmar home">
+        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="6" fill="#f5a623"/>
+          <path d="M10 10 L10 22 L16 16 Z" fill="#0f1117"/>
+          <path d="M18 13 L24 13" stroke="#0f1117" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M18 19 L22 19" stroke="#0f1117" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Code Myanmar</span>
+      </a>
+
+      <nav id="app-nav" aria-label="Main navigation">
+        <a href="#home" data-route="home">Lessons</a>
+        <a href="#stats" data-route="stats">My Progress</a>
+        <a href="#about" data-route="about">About</a>
+      </nav>
+
+      <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="app-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <main id="main-content" role="main">
+      <div class="splash-loading">
+        <div class="splash-spinner"></div>
+        <p>Loading lessons&hellip;</p>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Offline notice (shown by sw-check.js when on file://) -->
+  <div id="offline-notice" hidden>
+    <p>
+      <strong>Tip:</strong> For the best experience, open this app with a local server.
+      In the app folder, run: <code>python3 -m http.server 8080</code> then open
+      <code>http://localhost:8080</code>
+    </p>
+    <button id="offline-notice-close">Got it</button>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

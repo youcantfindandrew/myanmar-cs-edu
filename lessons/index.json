@@ -1,0 +1,93 @@
+[
+  {
+    "id": "01-what-is-code",
+    "title": "What Is Code?",
+    "description": "Discover what programming actually is and write your very first Python line.",
+    "estimatedMinutes": 15,
+    "order": 1
+  },
+  {
+    "id": "02-variables",
+    "title": "Variables — Giving Things Names",
+    "description": "Learn how to store information so your program can remember it.",
+    "estimatedMinutes": 20,
+    "order": 2
+  },
+  {
+    "id": "03-data-types",
+    "title": "Data Types — Numbers, Text, and More",
+    "description": "Understand the different kinds of data Python works with.",
+    "estimatedMinutes": 20,
+    "order": 3
+  },
+  {
+    "id": "04-input-output",
+    "title": "Input & Output — Talking to the User",
+    "description": "Make programs that ask questions and show answers.",
+    "estimatedMinutes": 20,
+    "order": 4
+  },
+  {
+    "id": "05-conditionals",
+    "title": "Conditionals — Making Decisions",
+    "description": "Teach your program to choose different actions based on conditions.",
+    "estimatedMinutes": 25,
+    "order": 5
+  },
+  {
+    "id": "06-loops",
+    "title": "Loops — Making the Computer Repeat Itself",
+    "description": "Learn how to make Python run the same code many times without copy-pasting.",
+    "estimatedMinutes": 25,
+    "order": 6
+  },
+  {
+    "id": "07-functions",
+    "title": "Functions — Teaching the Computer New Tricks",
+    "description": "Write reusable blocks of code with your own custom functions.",
+    "estimatedMinutes": 25,
+    "order": 7
+  },
+  {
+    "id": "08-lists",
+    "title": "Lists — Groups of Things",
+    "description": "Store multiple values together and work with collections of data.",
+    "estimatedMinutes": 25,
+    "order": 8
+  },
+  {
+    "id": "09-debugging",
+    "title": "Debugging — Finding and Fixing Mistakes",
+    "description": "Learn to read error messages and fix broken code like a real programmer.",
+    "estimatedMinutes": 20,
+    "order": 9
+  },
+  {
+    "id": "10-mini-project-calculator",
+    "title": "Mini Project — Build a Calculator",
+    "description": "Put everything together: build a working calculator from scratch.",
+    "estimatedMinutes": 35,
+    "order": 10
+  },
+  {
+    "id": "11-strings",
+    "title": "Strings — Working With Text",
+    "description": "Manipulate and analyse text with Python's powerful string tools.",
+    "estimatedMinutes": 25,
+    "order": 11
+  },
+  {
+    "id": "12-dictionaries",
+    "title": "Dictionaries — Labelled Storage",
+    "description": "Store and look up data using keys, like a real-world dictionary.",
+    "estimatedMinutes": 25,
+    "order": 12
+  },
+  {
+    "id": "13-final-project",
+    "title": "Final Project — Student Grade Tracker",
+    "description": "Build a complete, useful program that stores and reports student grades.",
+    "estimatedMinutes": 45,
+    "order": 13
+  }
+]
