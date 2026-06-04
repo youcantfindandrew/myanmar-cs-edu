@@ -1,0 +1,52 @@
+{
+  "id": "08-lists",
+  "title": "စာရင်းများ — အုပ်စုများ",
+  "description": "တန်ဖိုးများစွာကို တစ်နေရာတည်းတွင် သိမ်းဆည်းပြီး ဒေတာစုစည်းမှုများနှင့် လုပ်ဆောင်ပါ။",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "ယခုအချိန်အထိ ကိန်းရှင်တစ်ခုတွင် တန်ဖိုးတစ်ခုသာ ထားနိုင်ခဲ့သည်။ သို့သော် ကျောင်းသားနာမည် ၃၀ သိမ်းဆည်းလိုလျှင်ကော? ကိန်းရှင် ၃၀ ဖန်တီးရမည်မဟုတ်ပါ။\n\nList တစ်ခုသည် တန်ဖိုးများစွာကို အစဉ်အတိုင်း တစ်နေရာတွင် သိမ်းဆည်းနိုင်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "students = [\"Aung\", \"Myo\", \"Kyaw\", \"Nwe\"]\nprint(students)          # the whole list\nprint(students[0])       # 'Aung' — first item\nprint(students[2])       # 'Kyaw' — third item\nprint(len(students))     # 4 — number of items",
+      "explanation": "List များသည် square brackets သုံးသည်။ Items များကို ကော်မာဖြင့် ခွဲသည်။ ရေတွက်ခြင်းသည် 0 မှ စသည် — ထို့ကြောင့် ပထမ item သည် index 0 တွင်ရှိသည်၊ ဒုတိယသည် index 1 တွင်ရှိသည်။ len() သည် items အရေအတွက်ကို ပေးသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "ဤသည် ဘာကို ရိုက်နှိပ်မည်နည်း?\ncolours = [\"red\", \"green\", \"blue\"]\nprint(colours[1])",
+      "options": ["red", "green", "blue", "အမှားတစ်ခု"],
+      "correct": 1,
+      "explanation": "Index 1 သည် ဒုတိယ item ဖြစ်သည်။ ရေတွက်ခြင်း 0 မှ စသောကြောင့် index 0 = 'red'၊ index 1 = 'green'။"
+    },
+    {
+      "type": "text",
+      "content": "List မှ items များကို ပြောင်းလဲ၊ ထည့်သွင်း နှင့် ဖယ်ရှားနိုင်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "fruits = [\"apple\", \"banana\"]\n\nfruits.append(\"mango\")   # add to end\nprint(fruits)            # ['apple', 'banana', 'mango']\n\nfruits[0] = \"grape\"      # change first item\nprint(fruits)            # ['grape', 'banana', 'mango']\n\nfruits.remove(\"banana\")  # remove by value\nprint(fruits)            # ['grape', 'mango']",
+      "explanation": "append() သည် item တစ်ခုကို နောက်ဆုံးတွင် ထည့်သည်။ Index သုံး၍ item ကို ပြောင်းနိုင်သည်။ remove() သည် ပေးသောတန်ဖိုးနှင့် ကိုက်ညီသော ပထမ item ကို ဖျက်သည်။"
+    },
+    {
+      "type": "text",
+      "content": "List နှင့် loop ပေါင်းသုံးခြင်းသည် အလွန်အစွမ်းထက်သည်။ ကုဒ်အနည်းငယ်ဖြင့် list ထဲရှိ item တိုင်းကို ကိုင်တွယ်နိုင်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "scores = [85, 72, 91, 64, 88]\n\ntotal = 0\nfor score in scores:\n    total = total + score\n\naverage = total / len(scores)\nprint(f\"Average score: {average}\")",
+      "explanation": "Loop သည် scores ထဲရှိ ဂဏန်းတိုင်းကို ပေါင်းထည့်သည်။ ထို့နောက် scores အရေအတွက်ဖြင့် စားပြီး average ရသည်။ List ထဲတွင် scores မည်မျှရှိသည်ဆိုသည်နှင့်မဆိုင်ဘဲ ဤကုဒ်ပင် အလုပ်လုပ်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "ဂဏန်း ၅ ခုပါသော list ဖန်တီးပါ။ Loop သုံး၍ list ထဲရှိ အကြီးဆုံးဂဏန်းကို ရှာဖွေပြီး ရိုက်နှိပ်ပါ။ (max() function မသုံးပါနှင့် — loop ဖြင့်ကိုယ်တိုင် ရှာပါ။)",
+      "starterCode": "numbers = [34, 78, 12, 56, 90]\n\n# Your code here\n",
+      "hint": "largest = numbers[0] မှ စပါ။ ထို့နောက် numbers ထဲ loop ကာ စစ်ဆေးပါ — လက်ရှိဂဏန်းသည် largest ထက်ကြီးလျှင် largest ကို update ပြုပါ။",
+      "solution": "numbers = [34, 78, 12, 56, 90]\n\nlargest = numbers[0]\nfor n in numbers:\n    if n > largest:\n        largest = n\n\nprint(\"Largest:\", largest)"
+    }
+  ]
+}

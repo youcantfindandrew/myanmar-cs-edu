@@ -1,0 +1,49 @@
+{
+  "id": "11-strings",
+  "title": "String များ — စာသားနှင့် လုပ်ဆောင်ခြင်း",
+  "description": "Python ၏ string ကိရိယာများဖြင့် စာသားကို ကိုင်တွယ်ပြီး စစ်ဆေးပါ။",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "String များသည် character များ၏ sequence ဖြစ်သည်။ Python တွင် ၎င်းတို့ကို ကိုင်တွယ်ရန် built-in ကိရိယာများ အများကြီးရှိသည်။ Character အရေအတွက် ရေတွက်နိုင်သည်၊ case ပြောင်းနိုင်သည်၊ စာသားထဲ ရှာနိုင်သည်၊ အပိုင်းများဖြင့် ခွဲနိုင်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "message = \"Hello, Myanmar!\"\n\nprint(len(message))           # 15 — number of characters\nprint(message.upper())        # HELLO, MYANMAR!\nprint(message.lower())        # hello, myanmar!\nprint(message.replace(\"Hello\", \"Mingalaba\"))  # Mingalaba, Myanmar!",
+      "explanation": "String method များကို ကိန်းရှင်အမည်နောက်တွင် dot ဖြင့် call ပြုသည်။ upper() နှင့် lower() သည် case ပြောင်းသည်။ replace() သည် စာသားတစ်ပိုင်းကို အခြားတစ်ပိုင်းဖြင့် အစားထိုးသည်။ ဤတို့အားလုံးသည် string အသစ်ပြန်ပေးသည် — မူရင်း မပြောင်းပါ။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "sentence = \"Python is fun to learn\"\n\nprint(sentence.split())          # ['Python', 'is', 'fun', 'to', 'learn']\nprint(sentence.split(\"to\"))      # ['Python is fun ', ' learn']\n\nwords = sentence.split()\nprint(len(words))                # 5 — number of words",
+      "explanation": "split() သည် string ကို list ခွဲသည်။ argument မပေးလျှင် space ဖြင့် ခွဲသည်။ argument ပေးလျှင် ထို text ဖြင့် ခွဲသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "ဤသည် ဘာကို ရိုက်နှိပ်မည်နည်း?\nname = \"  khin myo  \"\nprint(name.strip().title())",
+      "options": [
+        "  khin myo  ",
+        "khin myo",
+        "Khin Myo",
+        "KHIN MYO"
+      ],
+      "correct": 2,
+      "explanation": "strip() သည် အရှေ့နှင့် အနောက်ရှိ space များကို ဖယ်ရှားသည်။ title() သည် စကားလုံးတစ်ခုချင်စီ၏ ပထမအက္ခရာကို အကြီးစာလုံးအဖြစ်ပြောင်းသည်။ ပေါင်းလျှင် 'Khin Myo' ဖြစ်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# Slicing — getting part of a string\ntext = \"Hello, World!\"\n\nprint(text[0:5])   # Hello   (characters 0 to 4)\nprint(text[7:])    # World!  (from index 7 to end)\nprint(text[:5])    # Hello   (from start to index 4)\nprint(text[-6:])   # World!  (last 6 characters)",
+      "explanation": "text[start:end] သည် string ၏ အပိုင်းတစ်ခုပေးသည်။ end index မပါဝင်ပါ။ Negative index များသည် နောက်ဆုံးမှ ရေတွက်သည် — -1 သည် နောက်ဆုံး character ဖြစ်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "သုံးစွဲသူ၏ အမည်ပြည့်ကို မေးသောပရိုဂရမ်ရေးပြီး ဤသုံးချက်ကို ရိုက်နှိပ်ပါ\n1. အမည်ကို CAPITAL လုံးများဖြင့်\n2. Space မပါဘဲ character အရေအတွက်\n3. Initials (စကားလုံးတိုင်း ပထမအက္ခရာ)",
+      "starterCode": "name = input(\"Enter your full name: \")\n\n# 1. Print in capitals\n\n# 2. Print number of characters (not counting spaces)\n\n# 3. Print initials (first letter of each word)\n",
+      "hint": "Initials အတွက် — name ကို words များဖြင့် split ပြုပြီး word တစ်ခုချင်စီမှ word[0] ယူပါ။",
+      "solution": "name = input(\"Enter your full name: \")\n\n# 1. Capitals\nprint(name.upper())\n\n# 2. Characters without spaces\nno_spaces = name.replace(\" \", \"\")\nprint(len(no_spaces))\n\n# 3. Initials\nwords = name.split()\ninitials = \"\"\nfor word in words:\n    initials += word[0].upper()\nprint(initials)"
+    }
+  ]
+}

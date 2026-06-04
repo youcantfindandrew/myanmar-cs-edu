@@ -11,6 +11,7 @@
 import { getProgress, setProgress } from './db.js';
 import { markLessonStarted, markLessonCompleted, recordQuizAnswer,
          recordExerciseAttempt, saveLastSection, addTimeSpent } from './progress.js';
+import { getLang, t } from './lang.js';
 
 // ─── Lesson loading ──────────────────────────────────────────────────────────
 
@@ -18,6 +19,13 @@ let _lessonIndex = null;
 
 export async function loadLessonIndex() {
   if (_lessonIndex) return _lessonIndex;
+  const lang = getLang();
+  if (lang !== 'en') {
+    try {
+      const res = await fetch(`./lessons/${lang}/index.json`);
+      if (res.ok) { _lessonIndex = await res.json(); return _lessonIndex; }
+    } catch (_) {}
+  }
   const res = await fetch('./lessons/index.json');
   _lessonIndex = await res.json();
   return _lessonIndex;
@@ -27,6 +35,17 @@ const _lessonCache = new Map();
 
 export async function loadLesson(id) {
   if (_lessonCache.has(id)) return _lessonCache.get(id);
+  const lang = getLang();
+  if (lang !== 'en') {
+    try {
+      const res = await fetch(`./lessons/${lang}/${id}.json`);
+      if (res.ok) {
+        const lesson = await res.json();
+        _lessonCache.set(id, lesson);
+        return lesson;
+      }
+    } catch (_) {}
+  }
   const res    = await fetch(`./lessons/${id}.json`);
   const lesson = await res.json();
   _lessonCache.set(id, lesson);
@@ -47,25 +66,25 @@ export async function renderHome(container) {
 
   container.innerHTML = `
     <div class="page-header">
-      <h1>Learn to Code</h1>
-      <p>13 Python lessons — from zero to writing real programs. Works offline.</p>
+      <h1>${t('homeTitle')}</h1>
+      <p>${t('homeSubtitle')}</p>
     </div>
     ${completedCount > 0 ? `
     <div class="home-stats-bar">
-      <span>${completedCount} / ${index.length} lessons completed</span>
-      <a href="#stats" class="btn btn-ghost btn-sm">View progress →</a>
+      <span>${completedCount} / ${index.length} ${t('lessonsCompleted')}</span>
+      <a href="#stats" class="btn btn-ghost btn-sm">${t('viewProgress')}</a>
     </div>` : ''}
     <div class="home-search-wrap">
       <input
         type="search"
         id="lesson-search"
-        placeholder="Search lessons…"
-        aria-label="Search lessons"
+        placeholder="${t('searchPlaceholder')}"
+        aria-label="${t('searchPlaceholder')}"
         class="lesson-search-input"
       >
     </div>
     <div class="lesson-grid" id="lesson-grid"></div>
-    <p id="no-results" hidden style="color:var(--text-muted);text-align:center;margin-top:32px">No lessons match your search.</p>
+    <p id="no-results" hidden style="color:var(--text-muted);text-align:center;margin-top:32px">${t('noResults')}</p>
   `;
 
   const grid = container.querySelector('#lesson-grid');
@@ -351,7 +370,7 @@ function renderTextSection(section) {
 function renderCodeDemoSection(section) {
   return `
     <div class="section-code-demo">
-      <div class="code-demo-label">Example</div>
+      <div class="code-demo-label">${t('exampleLabel')}</div>
       <div class="code-block">
         <div class="code-block-header">
           <span class="code-lang-tag">${escapeHtml(section.language ?? 'python')}</span>
@@ -383,7 +402,7 @@ function renderQuizSection(section) {
     <div class="section-quiz" data-correct="${section.correct}">
       <div class="quiz-label">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><circle cx="7" cy="7" r="7"/></svg>
-        Quiz
+        ${t('quizLabel')}
       </div>
       <p class="quiz-question">
         ${escapeHtml(prose)}
@@ -405,18 +424,18 @@ function renderExerciseSection(section) {
           <rect x="2" y="2" width="10" height="10" rx="1"/>
           <path d="M5 7 L7 9 L9 5"/>
         </svg>
-        Exercise
+        ${t('exerciseLabel')}
       </div>
       <p class="exercise-prompt">${escapeHtml(section.prompt)}</p>
       <div class="exercise-editor-wrap">
         <div class="exercise-toolbar">
-          <button class="btn btn-primary btn-sm exercise-run">▶ Run</button>
-          <button class="btn btn-secondary btn-sm exercise-reset">Reset</button>
-          ${section.hint ? `<button class="btn btn-ghost btn-sm exercise-hint-btn">Show hint</button>` : ''}
+          <button class="btn btn-primary btn-sm exercise-run">${t('run')}</button>
+          <button class="btn btn-secondary btn-sm exercise-reset">${t('reset')}</button>
+          ${section.hint ? `<button class="btn btn-ghost btn-sm exercise-hint-btn">${t('showHint')}</button>` : ''}
           <span class="run-hint" aria-hidden="true">Ctrl+Enter to run</span>
           <div class="pyodide-loader" aria-live="polite">
             <div class="pyodide-progress"><div class="pyodide-progress-fill"></div></div>
-            <span class="pyodide-load-text">Loading Python…</span>
+            <span class="pyodide-load-text">${t('loadingPython')}</span>
           </div>
         </div>
         <!-- .exercise-host: CM6 attaches here; hidden textarea is the fallback -->
@@ -431,7 +450,7 @@ function renderExerciseSection(section) {
         </div>` : ''}
       ${section.solution ? `
         <div class="solution-section">
-          <button class="btn btn-ghost btn-sm exercise-solution-btn">Show solution (after 3 attempts)</button>
+          <button class="btn btn-ghost btn-sm exercise-solution-btn">${t('showSolution')}</button>
           <div class="solution-text">
             <strong>Solution:</strong>
             <pre><code>${highlightPython(escapeHtml(section.solution))}</code></pre>
@@ -499,7 +518,7 @@ function bindSectionEvents(wrapper, section, lessonId, onQuizAttempt, onQuizResu
   if (hintBtn && hintText) {
     hintBtn.addEventListener('click', () => {
       hintText.classList.toggle('show');
-      hintBtn.textContent = hintText.classList.contains('show') ? 'Hide hint' : 'Show hint';
+      hintBtn.textContent = hintText.classList.contains('show') ? t('hideHint') : t('showHint');
     });
   }
 
@@ -511,7 +530,7 @@ function bindSectionEvents(wrapper, section, lessonId, onQuizAttempt, onQuizResu
     solutionBtn.style.display = 'none'; // hidden until 3 attempts
     solutionBtn.addEventListener('click', () => {
       solutionText.classList.toggle('show');
-      solutionBtn.textContent = solutionText.classList.contains('show') ? 'Hide solution' : 'Show solution';
+      solutionBtn.textContent = solutionText.classList.contains('show') ? t('hideSolution') : t('showSolution');
     });
   }
 
@@ -535,7 +554,40 @@ function bindSectionEvents(wrapper, section, lessonId, onQuizAttempt, onQuizResu
   const runBtn  = wrapper.querySelector('.exercise-run');
   const outputEl = wrapper.querySelector('.exercise-output');
   if (runBtn && outputEl) {
+    // Disable the run button until Pyodide is ready so the user gets clear feedback
+    // instead of a button that appears to hang after clicking.
+    function _setPyodideLoadingState(state) {
+      if (state === 'ready') {
+        runBtn.disabled = false;
+        runBtn.textContent = t('run');
+      } else if (state === 'loading' || state === 'idle') {
+        runBtn.disabled = true;
+        runBtn.textContent = t('runLoading');
+      }
+    }
+
+    const currentState = window._pyodideState?.value ?? 'idle';
+    if (currentState !== 'ready') {
+      _setPyodideLoadingState(currentState);
+      const unsub = window._onPyodideStateChange?.((state) => {
+        _setPyodideLoadingState(state);
+        if (state === 'ready' || state === 'error') unsub();
+      });
+    }
+
     async function runCode() {
+      const pyState = window._pyodideState?.value;
+
+      // Guard: if Python isn't ready yet, show a message and bail out.
+      if (pyState !== 'ready') {
+        outputEl.className = 'exercise-output';
+        outputEl.innerHTML = pyState === 'loading'
+          ? `<span style="color:var(--accent)">⏳ Python is still loading — wait a moment then try again.</span>`
+          : `<span class="output-error">Python runtime not available.</span>\n` +
+            `<span style="color:var(--text-faint);font-size:12px">Connect to the internet once to download it (~10 MB), then it works offline.</span>`;
+        return;
+      }
+
       recordExerciseAttempt(lessonId);
       attempts++;
 
@@ -551,36 +603,21 @@ function bindSectionEvents(wrapper, section, lessonId, onQuizAttempt, onQuizResu
 
       outputEl.textContent = '';
       outputEl.className   = 'exercise-output';
+      runBtn.disabled = true;
+      runBtn.textContent = t('running');
 
-      if (typeof window._runPythonCode === 'function') {
-        runBtn.disabled = true;
-        runBtn.textContent = '⏳ Running…';
-        outputEl.textContent = '';
+      const result = await window._runPythonCode(code);
 
-        const result = await window._runPythonCode(code);
+      runBtn.disabled = false;
+      runBtn.textContent = t('run');
 
-        runBtn.disabled = false;
-        runBtn.textContent = '▶ Run';
-
-        if (result.error) {
-          outputEl.textContent = result.error;
-          outputEl.classList.add('output-error');
-        } else {
-          const out = [result.stdout, result.stderr ? '⚠ stderr:\n' + result.stderr : ''].filter(Boolean).join('\n');
-          outputEl.textContent = out || '(no output)';
-          if (result.stderr) outputEl.classList.add('output-warning');
-        }
+      if (result.error) {
+        outputEl.textContent = result.error;
+        outputEl.classList.add('output-error');
       } else {
-        // Pyodide still loading — show a helpful message
-        const state = window._pyodideState?.value;
-        if (state === 'loading') {
-          outputEl.innerHTML = `<span style="color:var(--accent)">⏳ Python is still loading — try again in a moment.</span>`;
-        } else {
-          outputEl.innerHTML =
-            `<span class="output-error">Python runtime not available.</span>\n` +
-            `<span style="color:var(--text-faint);font-size:12px">` +
-            `Connect to the internet once to download it (~10 MB), then it works offline.</span>`;
-        }
+        const out = [result.stdout, result.stderr ? '⚠ stderr:\n' + result.stderr : ''].filter(Boolean).join('\n');
+        outputEl.textContent = out || t('noOutput');
+        if (result.stderr) outputEl.classList.add('output-warning');
       }
     }
 
@@ -606,22 +643,23 @@ const PY_BUILTINS = new Set([
 ]);
 
 export function highlightPython(escapedCode) {
-  // Work on raw text, colorize token-by-token using a simple state machine
   // Input is already HTML-escaped — we wrap spans around tokens.
+  // Keywords/builtins MUST run first: later passes add <span class="..."> tags
+  // whose attribute text (e.g. the word "class") would otherwise be re-matched.
   return escapedCode
+    // Keywords and builtins — before any HTML tags are inserted
+    .replace(/\b([A-Za-z_]\w*)\b/g, (match) => {
+      if (PY_KEYWORDS.has(match)) return `<span class="py-keyword">${match}</span>`;
+      if (PY_BUILTINS.has(match)) return `<span class="py-builtin">${match}</span>`;
+      return match;
+    })
     // Strings (single + double, already escaped)
     .replace(/(&quot;(?:[^&]|&amp;|&lt;|&gt;)*?&quot;|&#39;(?:[^&]|&amp;|&lt;|&gt;)*?&#39;)/g,
              '<span class="py-string">$1</span>')
     // Comments
     .replace(/(#[^\n]*)/g, '<span class="py-comment">$1</span>')
     // Numbers
-    .replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="py-number">$1</span>')
-    // Keywords and builtins — after escaping so we only match word boundaries
-    .replace(/\b([A-Za-z_]\w*)\b/g, (match) => {
-      if (PY_KEYWORDS.has(match)) return `<span class="py-keyword">${match}</span>`;
-      if (PY_BUILTINS.has(match)) return `<span class="py-builtin">${match}</span>`;
-      return match;
-    });
+    .replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="py-number">$1</span>');
 }
 
 // ─── Utilities ───────────────────────────────────────────────────────────────

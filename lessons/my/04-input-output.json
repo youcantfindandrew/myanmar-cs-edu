@@ -1,0 +1,57 @@
+{
+  "id": "04-input-output",
+  "title": "အဝင်နှင့် အထွက် — သုံးစွဲသူနှင့် ပြောဆိုခြင်း",
+  "description": "မေးခွန်းမေးပြီး အဖြေပြသသောပရိုဂရမ်များ ဖန်တီးပါ။",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "ယခုအချိန်အထိ ကျွန်ုပ်တို့ပရိုဂရမ်များသည် fixed တန်ဖိုးများသာ သုံးသည် — ဒေတာကို တိုက်ရိုက်ကုဒ်ထဲ ရေးသွင်းသည်။ စစ်မှန်သောပရိုဂရမ်များသည် သုံးစွဲသူနှင့် ပြောဆိုသည် — မေးခွန်းမေးပြီး အဖြေများကို တုံ့ပြန်သည်။\n\nPython တွင် `input()` သည် ပရိုဂရမ်ကို ရပ်ဆိုင်းပြီး သုံးစွဲသူ တစ်ခုခု ရိုက်ထည့်ရန် စောင့်ဆိုင်းသည်။ သုံးစွဲသူ ရိုက်ထည့်သည့်အရာကို string တစ်ခုအဖြစ် ပြန်ပေးသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "name = input(\"What is your name? \")\nprint(\"Hello, \" + name + \"!\")",
+      "explanation": "input() သည် ကွင်းအတွင်းရှိမေးခွန်းကို ပြပြီး စောင့်ဆိုင်းသည်။ သုံးစွဲသူသည် အဖြေရိုက်ပြီး Enter နှိပ်သည်။ ၎င်း၏အဖြေကို name ထဲ သိမ်းဆည်းပြီး print() တွင် အသုံးပြုသည်။"
+    },
+    {
+      "type": "text",
+      "content": "မှတ်ထားပါ — `input()` သည် အမြဲ string ပြန်ပေးသည် — သုံးစွဲသူ ဂဏန်းရိုက်ထည့်လည်း string ဖြစ်နေသည်။\n\nသုံးစွဲသူ input ဖြင့် သင်္ချာပြုလုပ်လိုလျှင် `int()` သို့မဟုတ် `float()` ဖြင့် ပထမဦးစွာ ပြောင်းရမည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "age_text = input(\"How old are you? \")\nage = int(age_text)        # convert to number\nnext_year = age + 1\nprint(\"Next year you will be \" + str(next_year))",
+      "explanation": "အဆင့် ၁ — input ယူပါ (string ဖြစ်သည်)။ အဆင့် ၂ — int သို့ပြောင်းပါ။ အဆင့် ၃ — သင်္ချာပြုပါ။ အဆင့် ၄ — ရိုက်နှိပ်ရန် string ပြန်ပြောင်းပါ။"
+    },
+    {
+      "type": "quiz",
+      "question": "input() သည် မည်သည့်အမျိုးအစားကို အမြဲပြန်ပေးသနည်း?",
+      "options": [
+        "int",
+        "float",
+        "str",
+        "သုံးစွဲသူ ရိုက်ထည့်သည့်အပေါ် မူတည်သည်"
+      ],
+      "correct": 2,
+      "explanation": "input() သည် သုံးစွဲသူ ဘာရိုက်ထည့်သည်ဆိုသည်နှင့်မဆိုင်ဘဲ str (string) ကိုသာ အမြဲပြန်ပေးသည်။ ဂဏန်းလိုလျှင် ကိုယ်တိုင် ပြောင်းပေးရမည်။"
+    },
+    {
+      "type": "text",
+      "content": "f-string ဖြင့်လည်း ဖော်မတ်ကျသောမက်ဆေ့ချ်များ ရိုက်နှိပ်နိုင်သည်။ f-string သည် ကိုးကွဲအမှတ်ရှေ့တွင် `f` အက္ခရာဖြင့် စသည်။ ထဲတွင် ကိန်းရှင်အမည်များကို curly braces `{}` ထဲ ထည့်ပါ — Python သည် အလိုအလျောက် ဖြည့်ပေးသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "name = \"Htike\"\nage = 17\ncity = \"Mandalay\"\n\nprint(f\"My name is {name}. I am {age} years old and I live in {city}.\")",
+      "explanation": "f-string များသည် + ဖြင့် အရာများကို ချိတ်ဆက်ရခြင်းထက် ပိုလွယ်ကူသည်။ Python သည် {name}၊ {age}၊ {city} ကို အမှန်တကယ်တန်ဖိုးများဖြင့် အစားထိုးပေးသည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "သုံးစွဲသူ၏နာမည်နှင့် အသက်ကို မေးသောပရိုဂရမ်ရေးပါ။ ထို့နောက် f-string ဖြင့် — \"[name] is [age] years old and will be [age+1] next year.\" ဟု ရိုက်နှိပ်ပါ။",
+      "starterCode": "# Ask for name\n# Ask for age (remember to convert!)\n# Print the sentence\n",
+      "hint": "name = input(\"...\")  ထို့နောက်  age = int(input(\"...\"))  ထို့နောက်  print(f\"...{name}...{age}...{age+1}...\")",
+      "solution": "name = input(\"What is your name? \")\nage = int(input(\"How old are you? \"))\nprint(f\"{name} is {age} years old and will be {age + 1} next year.\")"
+    }
+  ]
+}

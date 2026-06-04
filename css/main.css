@@ -566,3 +566,29 @@ code, kbd, pre { font-family: var(--font-mono); }
   #main-content { padding: 24px 16px; }
   .lesson-grid { grid-template-columns: 1fr; }
 }
+
+/* ─── Myanmar language support ───────────────────────────────────────────────── */
+:lang(my), :lang(my) * {
+  font-family: 'Padauk', 'Myanmar Text', 'Pyidaungsu', 'Noto Sans Myanmar', sans-serif;
+  line-height: 1.9;
+}
+:lang(my) code, :lang(my) pre, :lang(my) .exercise-textarea,
+:lang(my) .cm-editor {
+  font-family: var(--font-mono);
+  line-height: 1.7;
+}
+
+/* ─── Language toggle button ─────────────────────────────────────────────────── */
+#lang-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 3px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: 'Padauk', 'Myanmar Text', sans-serif;
+}
+#lang-toggle:hover { color: var(--text-primary); border-color: var(--border-light); }

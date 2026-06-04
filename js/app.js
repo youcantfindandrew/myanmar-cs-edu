@@ -13,6 +13,9 @@ import { renderStats } from './stats.js';
 import { initEditors, initPyodide, installGlobals } from './editor.js';
 import { mountTutor, cleanup as cleanupTutor } from './tutor.js';
 import { getStudent }  from './db.js';
+import { getLang, setLang, t, applyLangAttr } from './lang.js';
+
+applyLangAttr();
 
 // Boot Pyodide sandbox in the background immediately so it's ready when
 // a student opens their first exercise. installGlobals() wires up
@@ -46,6 +49,18 @@ if (localStorage.getItem('offline-notice-dismissed') === '1') {
   const notice = document.getElementById('offline-notice');
   if (notice) notice.hidden = true;
 }
+
+// ─── Language toggle ─────────────────────────────────────────────────────────
+
+document.getElementById('lang-toggle')?.addEventListener('click', () => {
+  setLang(getLang() === 'my' ? 'en' : 'my');
+});
+
+// Apply translated nav link labels
+document.querySelectorAll('[data-i18n]').forEach((el) => {
+  const key = el.dataset.i18n;
+  if (key) el.textContent = t(key);
+});
 
 // ─── Mobile nav ───────────────────────────────────────────────────────────────
 

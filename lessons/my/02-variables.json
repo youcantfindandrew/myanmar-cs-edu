@@ -1,0 +1,57 @@
+{
+  "id": "02-variables",
+  "title": "ကိန်းရှင်များ — အမည်ပေးခြင်း",
+  "description": "ပရိုဂရမ်မှ မှတ်မိနိုင်ရန် သတင်းအချက်အလက်ကို သိမ်းဆည်းပုံ လေ့လာပါ။",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "စာတစ်စောင်ရေးနေသည်ဆိုပါစို့။ လက်ခံသူ၏နာမည်ကို အထက်တွင် ရေးသင်းပြီး ထပ်ခါတလဲလဲ မရေးဘဲ တစ်နေရာလုံးတွင် အသုံးပြုနိုင်သည်။\n\nကိန်းရှင်ဆိုသည်မှာ သေတ္တာတစ်ခုပေါ်ရှိ အညွှန်းတစ်ခုနှင့်တူသည်။ သေတ္တာထဲတွင် တစ်ခုခုထည့်ပြီး အမည်ပေးသည်၊ နောက်မှ ထိုအမည်ဖြင့် ပြန်ယူနိုင်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "name = \"Khin Myo\"\nage = 16\nprint(name)\nprint(age)",
+      "explanation": "= သင်္ကေတသည် တန်ဖိုးကို ကိန်းရှင်တစ်ခုထဲ သိမ်းဆည်းသည်။ name တွင် 'Khin Myo' ဆိုသောစာသားရှိသည်။ age တွင် 16 ဟူသောဂဏန်းရှိသည်။ နောက်မှ ကိန်းရှင်အမည်သာ သုံးရသည် — တန်ဖိုးကို ထပ်ရေးစရာမလိုပါ။"
+    },
+    {
+      "type": "text",
+      "content": "ကိန်းရှင်အမည်များတွင် စည်းကမ်းများနည်းနည်းရှိသည်\n\n- အက္ခရာများ၊ ဂဏန်းများ နှင့် အောက်မျဉ်း (_) ပါဝင်နိုင်သည်\n- ဂဏန်းဖြင့် မစနိုင်ပါ\n- အက္ခရာနှင့် case မတူပါက ကွဲပြားသည် — `name` နှင့် `Name` သည် ကိန်းရှင်နှစ်ခုဖြစ်သည်\n- Space မသုံးနိုင် — `_` ကိုအစားထိုးသုံးပါ — `student_name` ရသည်၊ `student name` မရပါ"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "student_name = \"Ma Aye\"\nstudent_age = 15\ncity = \"Yangon\"\n\nprint(\"Name:\", student_name)\nprint(\"Age:\", student_age)\nprint(\"City:\", city)",
+      "explanation": "print() တွင် ကော်မာဖြင့် ခွဲ၍ တစ်ကြိမ်တည်းဖြင့် တစ်ခုထက်ပိုသောအရာများကို ရိုက်နှိပ်နိုင်သည်။ Python သည် ၎င်းတို့ကြားတွင် space တစ်ခု အလိုအလျောက်ထည့်ပေးသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "Python တွင် မည်သောကိန်းရှင်အမည်မှာ မှန်ကန်သနည်း?",
+      "options": [
+        "2names",
+        "student name",
+        "student_name",
+        "student-name"
+      ],
+      "correct": 2,
+      "explanation": "student_name မှန်ကန်သည်။ ကိန်းရှင်အမည်များသည် ဂဏန်းဖြင့် မစနိုင်ပါ၊ space မရှိနိုင်ပါ၊ hyphen မသုံးနိုင်ပါ (hyphen သည် Python တွင် နှုတ်ဆိုသည်ကို ဆိုလိုသည်)။"
+    },
+    {
+      "type": "text",
+      "content": "ကိန်းရှင်တစ်ခု၏တန်ဖိုးကို နောက်မှ ပြောင်းလဲနိုင်သည်။ ကိန်းရှင်သည် နောက်ဆုံးသတ်မှတ်ထားသောတန်ဖိုးကိုသာ ဆောင်ဆောင်ထားသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "score = 0\nprint(score)   # prints 0\n\nscore = 10\nprint(score)   # prints 10\n\nscore = score + 5\nprint(score)   # prints 15",
+      "explanation": "score = score + 5 ဆိုသည်မှာ — score ၏ လက်ရှိတန်ဖိုးကိုယူ၊ 5 ပေါင်းထည့်၊ ရလဒ်ကို score ထဲ ပြန်သိမ်းဆည်းသည် ဟုဆိုလိုသည်။ တန်ဖိုးကို update ပြုလုပ်ရာတွင် ဤနည်းဖြင့် ပြုသည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "ကိန်းရှင်နှစ်ခု ဖန်တီးပါ — သင့်နာမည်နှင့် သင်နှစ်သက်သောဂဏန်း။ ထို့နောက် print() ဖြင့် နှစ်ခုစလုံး ရိုက်နှိပ်ပါ။",
+      "starterCode": "# Create a variable called my_name\n# Create a variable called favourite_number\n# Print both\n",
+      "hint": "= ဖြင့် သတ်မှတ်ပါ။ စာသားတန်ဖိုးများကို ကိုးကွဲအမှတ်ထဲ ထည့်ပါ။ ဂဏန်းများကို ကိုးကွဲအမှတ်မလိုပါ။",
+      "solution": "my_name = \"Aung\"\nfavourite_number = 7\nprint(my_name)\nprint(favourite_number)"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+
+  <!-- Myanmar Unicode font (Padauk) — loads once, then cached offline -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap">
+
+  <!-- Set lang attribute before first paint to avoid flash -->
+  <script>document.getElementById('html-root').lang = localStorage.getItem('lang') === 'my' ? 'my' : 'en';</script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/main.css">
@@ -39,9 +46,10 @@
       </a>
 
       <nav id="app-nav" aria-label="Main navigation">
-        <a href="#home" data-route="home">Lessons</a>
-        <a href="#stats" data-route="stats">My Progress</a>
-        <a href="#about" data-route="about">About</a>
+        <a href="#home" data-route="home" data-i18n="navLessons">Lessons</a>
+        <a href="#stats" data-route="stats" data-i18n="navProgress">My Progress</a>
+        <a href="#about" data-route="about" data-i18n="navAbout">About</a>
+        <button id="lang-toggle" aria-label="Switch language" title="Switch language">မြန်မာ / EN</button>
       </nav>
 
       <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="app-nav">

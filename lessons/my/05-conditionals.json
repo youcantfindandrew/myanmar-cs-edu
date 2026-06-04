@@ -1,0 +1,57 @@
+{
+  "id": "05-conditionals",
+  "title": "အခြေအနေများ — ဆုံးဖြတ်ချက်ချခြင်း",
+  "description": "အခြေအနေများပေါ်မူတည်၍ မတူညီသောလုပ်ဆောင်ချက်များ ရွေးချယ်ပုံ သင်ပါ။",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "အသုံးဝင်သောပရိုဂရမ်တိုင်း ဆုံးဖြတ်ချက်ချသည်။ မီးပွိုင့်သည် မည်သောအချိန်တွင် စိမ်းဖွင့်မည်ဆိုတာ ဆုံးဖြတ်သည်။ ဂိမ်းသည် သင်အနိုင်ရသလား ရှုံးသလား ဆိုတာ ဆုံးဖြတ်သည်။\n\nPython တွင် `if`၊ `elif` နှင့် `else` ဖြင့် ဆုံးဖြတ်ချက်ချသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "temperature = 35\n\nif temperature > 30:\n    print(\"It is hot today.\")\nelse:\n    print(\"The weather is fine.\")",
+      "explanation": "if သည် အခြေအနေတစ်ခု စစ်ဆေးသည်။ အခြေအနေသည် True ဆိုလျှင် အောက်ရှိ indented ကုဒ်ကို လုပ်ဆောင်သည်။ else သည် အခြေအနေ False ဖြစ်သောအခါ လုပ်ဆောင်သည်။ Indentation (space 4 ခု) လိုအပ်သည် — Python သည် ၎င်းဖြင့် မည်သောကုဒ်က if ထဲတွင်ရှိသည်ဆိုတာ သိသည်။"
+    },
+    {
+      "type": "text",
+      "content": "နှိုင်းယှဉ်မှု operator များဖြင့် တန်ဖိုးများ နှိုင်းယှဉ်နိုင်သည်\n\n- `>` ထက်ကြီးသည်\n- `<` ထက်ငယ်သည်\n- `>=` ထက်ကြီးသို့မဟုတ် တူညီသည်\n- `<=` ထက်ငယ်သို့မဟုတ် တူညီသည်\n- `==` တူညီသည် (equals sign နှစ်ခု — = တစ်ခုသည် သတ်မှတ်ခြင်းကို ဆိုလိုသည်!)\n- `!=` မတူညီ"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "score = 75\n\nif score >= 80:\n    print(\"Excellent!\")\nelif score >= 60:\n    print(\"Good job.\")\nelse:\n    print(\"Keep practising.\")",
+      "explanation": "elif ဆိုသည်မှာ 'else if' ဟုဆိုလိုသည်။ Python သည် အခြေအနေတစ်ခုချင်းစီကို အစဉ်အတိုင်း စစ်ဆေးပြီး True ဖြစ်သောပထမဆုံးတစ်ခုကို လုပ်ဆောင်သည်။ ကျန်သည်များကို ကျော်ဖယ်သည်။ ဤဖြင့် cases များစွာကို ကိုင်တွယ်နိုင်သည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "ဤကုဒ်သည် ဘာကို ရိုက်နှိပ်မည်နည်း?\nscore = 55\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+      "options": [
+        "Pass",
+        "Fail",
+        "ဘာမှမထွက်ပါ",
+        "အမှားတစ်ခု"
+      ],
+      "correct": 1,
+      "explanation": "55 သည် >= 60 မဟုတ်ပါ၊ ထို့ကြောင့် if အခြေအနေသည် False ဖြစ်သည်။ Python သည် else block ကို အစားလုပ်ဆောင်ပြီး 'Fail' ကို ရိုက်နှိပ်သည်။"
+    },
+    {
+      "type": "text",
+      "content": "`and` နှင့် `or` ဖြင့် အခြေအနေများကို ပေါင်းစပ်နိုင်သည်\n\n- `and` — အခြေအနေနှစ်ခုစလုံး True ဖြစ်ရမည်\n- `or` — အနည်းဆုံး တစ်ခု True ဖြစ်ရမည်\n- `not` — True ကို False အဖြစ်၊ False ကို True အဖြစ် ပြောင်းသည်"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "age = 16\nhas_permission = True\n\nif age >= 13 and has_permission:\n    print(\"You can use this app.\")\nelse:\n    print(\"Access denied.\")",
+      "explanation": "'and' ဖြင့် True ဖြစ်ရန် အခြေအနေနှစ်ခုစလုံး True ဖြစ်ရမည်။ age >= 13 သည် True ဖြစ်ပြီး has_permission သည် True ဖြစ်သောကြောင့် မက်ဆေ့ချ်ကို ရိုက်နှိပ်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "ဂဏန်းတစ်ခု မေးသောပရိုဂရမ်ရေးပါ — ၎င်းသည် အပေါင်း၊ အနှုတ် သို့မဟုတ် သုည ဆိုတာ ရိုက်နှိပ်ပါ။",
+      "starterCode": "number = int(input(\"Enter a number: \"))\n# Check if it is positive, negative, or zero\n",
+      "hint": "if number > 0 ၊ elif number < 0 နှင့် else ကို သုညအတွက် သုံးပါ။",
+      "solution": "number = int(input(\"Enter a number: \"))\nif number > 0:\n    print(\"Positive\")\nelif number < 0:\n    print(\"Negative\")\nelse:\n    print(\"Zero\")"
+    }
+  ]
+}

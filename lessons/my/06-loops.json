@@ -1,0 +1,52 @@
+{
+  "id": "06-loops",
+  "title": "ကွင်းဆက်များ — ထပ်ခါတလဲလဲ လုပ်ဆောင်ခြင်း",
+  "description": "ကုဒ်ကူးယူခြင်းမရှိဘဲ Python ကို ထပ်ခါတလဲလဲ လုပ်ဆောင်စေပုံ လေ့လာပါ။",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "'Hello' ကို ၁၀၀ ကြိမ် ရိုက်နှိပ်လိုသည်ဆိုပါစို့။ print('Hello') ကို ၁၀၀ ကြိမ်ရေးနိုင်သည်... သို့မဟုတ် loop တစ်ခု သုံးနိုင်သည်။\n\nLoop သည် Python ကို ပြောသည် — ဤကုဒ်ပိုင်းကို ငါပြောသည့်အချိန်အထိ ထပ်ခါတလဲလဲ လုပ်ဆောင်ပါ ဟုဆိုလိုသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "for i in range(5):\n    print(\"Hello\", i)",
+      "explanation": "ဤ loop သည် ၅ ကြိမ် လုပ်ဆောင်သည်။ တစ်ကြိမ်တိုင်း i သည် မတူညီသောဂဏန်းဖြစ်သည် — 0၊ 1၊ 2၊ 3၊ 4။ range(5) သည် 0 မှ 5 မတိုင်မီ (5 မပါ) အထိ sequence ပေးသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "ဤ loop သည် မည်မျှကြိမ် တစ်ခုခု ရိုက်နှိပ်မည်နည်း?\nfor i in range(3):\n    print(\"hi\")",
+      "options": ["1", "2", "3", "4"],
+      "correct": 2,
+      "explanation": "range(3) သည် 0၊ 1၊ 2 — ဂဏန်း သုံးခုပေးသောကြောင့် loop သည် သုံးကြိမ် လုပ်ဆောင်သည်။"
+    },
+    {
+      "type": "text",
+      "content": "list တစ်ခုထဲရှိ items များပေါ်တွင်လည်း တိုက်ရိုက် loop လုပ်နိုင်သည်။ `for` နောက်ရှိ ကိန်းရှင်သည် တစ်ကြိမ်တိုင်း တန်ဖိုးတစ်ခုချင်းစီ ယူသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "cities = [\"Yangon\", \"Mandalay\", \"Naypyidaw\"]\n\nfor city in cities:\n    print(\"City:\", city)",
+      "explanation": "Loop တစ်ကြိမ်တိုင်း city သည် list မှ item တစ်ခုဖြစ်သည်။ ပထမ 'Yangon'၊ ထို့နောက် 'Mandalay'၊ ထို့နောက် 'Naypyidaw'။"
+    },
+    {
+      "type": "text",
+      "content": "`while` loop သည် အခြေအနေ True ဖြစ်သမျှ ဆက်လက်လုပ်ဆောင်သည်။ သတိထားပါ — အခြေအနေ False မဖြစ်လျှင် loop သည် အဆုံးမသတ်ဘဲ ထပ်ခါတလဲလဲ လုပ်ဆောင်နေမည်!"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "count = 0\nwhile count < 5:\n    print(\"Count:\", count)\n    count = count + 1\nprint(\"Done!\")",
+      "explanation": "Loop သည် စစ်ဆေးသည် — count < 5 မှန်သလား? မှန်လျှင် block ကို လုပ်ဆောင်သည်။ Block နောက်မှ count တစ်ခုတိုးသည်။ count ၅ ရောက်သောအခါ အခြေအနေ False ဖြစ်ပြီး loop ရပ်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "1 မှ 10 အထိ ဂဏန်းများကို ရိုက်နှိပ်သော loop ရေးပါ။",
+      "starterCode": "# Your code here\n",
+      "hint": "range(1, 11) သည် 1 မှ စပြီး 11 မတိုင်မီ ဆုံးသောဂဏန်းများပေးသည်။",
+      "solution": "for i in range(1, 11):\n    print(i)"
+    }
+  ]
+}

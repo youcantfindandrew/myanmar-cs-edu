@@ -1,0 +1,52 @@
+{
+  "id": "07-functions",
+  "title": "Function များ — ကွန်ပျူတာကို အသစ်သင်ပြခြင်း",
+  "description": "သင်ကိုယ်ပိုင် function များနှင့် ပြန်သုံးနိုင်သောကုဒ်ပိုင်းများ ရေးပါ။",
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "text",
+      "content": "Function များကို သင်ဘယ်ရိုဘူးပြီ — `print()`၊ `input()`၊ `int()`။ ဤသည်တို့မှာ Python နှင့်အတူပါလာသော function များဖြစ်သည်။\n\nသို့သော် ကိုယ်ပိုင် function များလည်း ရေးနိုင်သည်။ Function ဆိုသည်မှာ လိုအပ်သည့်အချိန်တိုင်း မည်မျှကြိမ်မဆို လုပ်ဆောင်နိုင်သော named ကုဒ်ပိုင်းတစ်ခုဖြစ်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def greet():\n    print(\"Hello!\")\n    print(\"Welcome to Code Myanmar.\")\n\ngreet()\ngreet()",
+      "explanation": "def သည် function ကို သတ်မှတ်သည်။ အမည်မှာ greet ဖြစ်သည်။ ထဲတွင် (indented) ကုဒ်သည် greet() ကို call တိုင်း လုပ်ဆောင်သည်။ နှစ်ကြိမ် call ပြုလုပ်ပါက ကုဒ်ကို နှစ်ကြိမ် ထပ်ရေးစရာမလိုဘဲ မက်ဆေ့ချ်ကို နှစ်ကြိမ် ရိုက်နှိပ်သည်။"
+    },
+    {
+      "type": "text",
+      "content": "Function များသည် အချက်အလက်ပေးနိုင်သောအခါ ပိုအသုံးဝင်လာသည်။ ဤသည်တို့ကို parameters (သို့မဟုတ် arguments) ဟုခေါ်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Aye\")\ngreet(\"Htun\")\ngreet(\"Ko Ko\")",
+      "explanation": "name သည် parameter တစ်ခုဖြစ်သည် — call ပြုလုပ်သူမှ ဖြည့်ပေးသောကိန်းရှင်တစ်ခု။ greet() သို့ call တစ်ကြိမ်တိုင်း မတူညီသောနာမည် သုံးနိုင်သည်။ Function သည် တူညီသောကုဒ်ကို လုပ်ဆောင်သော်လည်း တစ်ကြိမ်တိုင်း customize ပြုသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "ဤကုဒ်သည် ဘာကို ရိုက်နှိပ်မည်နည်း?\ndef add(a, b):\n    print(a + b)\n\nadd(3, 4)",
+      "options": ["3", "4", "7", "34"],
+      "correct": 2,
+      "explanation": "a သည် 3 ဖြစ်ပြီး b သည် 4 ဖြစ်သည်။ a + b = 7 ဖြစ်သောကြောင့် function သည် 7 ကို ရိုက်နှိပ်သည်။"
+    },
+    {
+      "type": "text",
+      "content": "Function များသည် `return` ဖြင့် ရလဒ်ပြန်ပေးနိုင်သည်။ ဤဖြင့် function ၏ output ကို အခြားတွက်ချက်မှုများတွင် သုံးနိုင်သည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def add(a, b):\n    return a + b\n\nresult = add(10, 5)\nprint(result)           # 15\nprint(add(3, 7))        # 10\nprint(add(2, 2) * 3)    # 12",
+      "explanation": "return သည် function ကို call ပြုလုပ်သူထံ တန်ဖိုးပြန်ပို့သည်။ ကိန်းရှင်ထဲ သိမ်းနိုင်သည်၊ တိုက်ရိုက် ရိုက်နှိပ်နိုင်သည်၊ သို့မဟုတ် တွက်ချက်မှုတွင် သုံးနိုင်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "ဂဏန်းတစ်ခုကိုယူပြီး ထိုဂဏန်းကို ကိုယ်နှင့်ကိုယ်ပွားထားသောတန်ဖိုး ပြန်ပေးသော square ဟုခေါ်သော function ရေးပါ။ မတူညီသောဂဏန်းများဖြင့် call ပြုပါ။",
+      "starterCode": "def square(number):\n    # return number * number\n    pass\n\nprint(square(4))    # should print 16\nprint(square(7))    # should print 49\n",
+      "hint": "pass ကို ဤဖြင့် အစားထိုးပါ — return number * number",
+      "solution": "def square(number):\n    return number * number\n\nprint(square(4))\nprint(square(7))"
+    }
+  ]
+}

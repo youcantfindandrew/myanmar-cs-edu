@@ -124,8 +124,9 @@ export function runPythonCode(code) {
 // Set global so lessons.js can use it without an import cycle
 // (lessons.js runs before editor.js is initialised)
 export function installGlobals() {
-  window._runPythonCode = runPythonCode;
-  window._pyodideState  = pyodideState;
+  window._runPythonCode        = runPythonCode;
+  window._pyodideState         = pyodideState;
+  window._onPyodideStateChange = onPyodideStateChange;
 }
 
 // ─── CodeMirror 6 editor init ────────────────────────────────────────────────

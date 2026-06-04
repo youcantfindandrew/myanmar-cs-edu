@@ -1,6 +1,6 @@
 // Service Worker — Cache-first strategy
 // Bump CACHE_NAME to force a fresh cache on next visit.
-const CACHE_NAME = 'myanmar-cs-v2';
+const CACHE_NAME = 'myanmar-cs-v5';
 
 // Every file the app needs to work fully offline.
 // Keep this list in sync with the actual files in the repo.
@@ -24,6 +24,7 @@ const CACHE_MANIFEST = [
   './js/editor.js',
   './js/tutor.js',
   './js/stats.js',
+  './js/lang.js',
 
   // Pyodide sandbox
   './pyodide-sandbox.html',
@@ -31,7 +32,7 @@ const CACHE_MANIFEST = [
   // CodeMirror 6 vendor bundle
   './vendor/codemirror/codemirror.min.js',
 
-  // Lesson manifest + all lessons
+  // Lesson manifest + all lessons (English)
   './lessons/index.json',
   './lessons/01-what-is-code.json',
   './lessons/02-variables.json',
@@ -46,6 +47,22 @@ const CACHE_MANIFEST = [
   './lessons/11-strings.json',
   './lessons/12-dictionaries.json',
   './lessons/13-final-project.json',
+
+  // Burmese translations
+  './lessons/my/index.json',
+  './lessons/my/01-what-is-code.json',
+  './lessons/my/02-variables.json',
+  './lessons/my/03-data-types.json',
+  './lessons/my/04-input-output.json',
+  './lessons/my/05-conditionals.json',
+  './lessons/my/06-loops.json',
+  './lessons/my/07-functions.json',
+  './lessons/my/08-lists.json',
+  './lessons/my/09-debugging.json',
+  './lessons/my/10-mini-project-calculator.json',
+  './lessons/my/11-strings.json',
+  './lessons/my/12-dictionaries.json',
+  './lessons/my/13-final-project.json',
 
   // Assets — icons
   './assets/icons/icon.svg',

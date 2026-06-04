@@ -1,0 +1,53 @@
+{
+  "id": "13-final-project",
+  "title": "နောက်ဆုံး Project — ကျောင်းသားအမှတ်ဇယား",
+  "description": "ကျောင်းသားများ၏ အမှတ်များကို သိမ်းဆည်းပြီး မှတ်တမ်းတင်သောပရိုဂရမ်တစ်ခု တည်ဆောက်ပါ။",
+  "estimatedMinutes": 45,
+  "sections": [
+    {
+      "type": "text",
+      "content": "ဂုဏ်ပြုပါသည် — နောက်ဆုံး project သို့ ရောက်ရှိလာပါပြီ။\n\nကိန်းရှင်များ၊ ဒေတာအမျိုးအစားများ၊ အဝင်/အထွက်၊ အခြေအနေများ၊ loop များ၊ function များ၊ list များ၊ debugging၊ string များ နှင့် dictionary များကို သင်ယူပြီးဖြစ်သည်။\n\nယခု စစ်မှန်သောအရာတစ်ခု တည်ဆောက်မည် — ဆရာ/ဆရာမ တကယ်သုံးနိုင်သော ကျောင်းသားအမှတ်ဇယား။"
+    },
+    {
+      "type": "text",
+      "content": "ပရိုဂရမ်သည် ဤသို့ လုပ်ဆောင်မည်\n- ဆရာ/ဆရာမ ကျောင်းသားများနှင့် ၎င်းတို့၏အမှတ်များ ထည့်သွင်းနိုင်မည်\n- ကျောင်းသားအားလုံးနှင့် အမှတ်များ ပြသမည်\n- Class average တွက်ချက်မည်\n- အကောင်းဆုံးကျောင်းသား ရှာဖွေမည်\n- နာမည်ဖြင့် ကျောင်းသားတစ်ဦး ရှာဖွေနိုင်မည်\n\nဤသည်မှာ သင်သင်ယူထားသောအရာအားလုံး သုံးသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# The data structure: a dictionary of name -> list of scores\nstudents = {}\n\ndef add_student(name, score):\n    if name not in students:\n        students[name] = []        # start a new list for this student\n    students[name].append(score)\n\ndef get_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n\ndef get_grade(average):\n    if average >= 90: return \"A\"\n    elif average >= 80: return \"B\"\n    elif average >= 70: return \"C\"\n    elif average >= 60: return \"D\"\n    else: return \"F\"",
+      "explanation": "အဓိက data structure မှာ key ကျောင်းသားနာမည်၊ value ၎င်း၏အမှတ်များ list ဖြစ်သော dictionary ဖြစ်သည်။ Function များသည် ကုဒ်ကို ကောင်းမွန်စွာ စီစဉ်ပေးသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def show_all():\n    if len(students) == 0:\n        print(\"No students yet.\")\n        return\n\n    print(\"\\n--- All Students ---\")\n    for name, scores in students.items():\n        avg = get_average(scores)\n        grade = get_grade(avg)\n        print(f\"{name:15} Avg: {avg:.1f}  Grade: {grade}\")\n\ndef show_top_student():\n    if len(students) == 0:\n        print(\"No students yet.\")\n        return\n\n    top_name = None\n    top_avg = -1\n    for name, scores in students.items():\n        avg = get_average(scores)\n        if avg > top_avg:\n            top_avg = avg\n            top_name = name\n    print(f\"\\nTop student: {top_name} with average {top_avg:.1f}\")",
+      "explanation": "show_all() သည် ကျောင်းသားအားလုံးကို loop ကာ ဖော်မတ်ကျသော table ပြသည်။ show_top_student() သည် list ထဲ အကြီးဆုံးဂဏန်းရှာသောနည်းဖြင့်ပင် average အမြင့်ဆုံးကို ရှာသည်။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def main_menu():\n    while True:\n        print(\"\\n=== Grade Tracker ===\")\n        print(\"1. Add student score\")\n        print(\"2. Show all students\")\n        print(\"3. Show top student\")\n        print(\"4. Search student\")\n        print(\"5. Quit\")\n\n        choice = input(\"Choose: \")\n\n        if choice == \"1\":\n            name  = input(\"Student name: \").strip().title()\n            score = float(input(\"Score (0-100): \"))\n            add_student(name, score)\n            print(f\"Added {name}: {score}\")\n        elif choice == \"2\":\n            show_all()\n        elif choice == \"3\":\n            show_top_student()\n        elif choice == \"4\":\n            name = input(\"Search name: \").strip().title()\n            if name in students:\n                scores = students[name]\n                avg = get_average(scores)\n                print(f\"{name}: scores={scores}, avg={avg:.1f}, grade={get_grade(avg)}\")\n            else:\n                print(f\"{name} not found.\")\n        elif choice == \"5\":\n            print(\"Goodbye!\")\n            break\n        else:\n            print(\"Invalid choice.\")\n\nmain_menu()",
+      "explanation": "Main menu loop သည် အရာအားလုံးကို ချိတ်ဆက်သည်။ .title() သည် 'aung aung' ကို 'Aung Aung' အဖြစ် ဖော်မတ်ပြုသည်။ {avg:.1f} သည် ဒဿမတစ်နေရာအထိ ဖော်မတ်ပြုသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "အမှတ်ဇယားတွင် အမှတ်တစ်ခုတည်းထားရာ single number အစား list (students[name] = []) သုံးသည်မှာ ဘာကြောင့်နည်း?",
+      "options": [
+        "List များသည် ဂဏန်းများထက် မြန်သည်",
+        "ကျောင်းသားတစ်ဦး အမှတ်များစွာ (ဥပမာ မတူညီသော test များ) ရနိုင်ရန်",
+        "Python သည် dictionary ထဲတွင် list လိုအပ်သည်",
+        "Style ရွေးချယ်ခြင်းသာဖြစ်သည်"
+      ],
+      "correct": 1,
+      "explanation": "List တစ်ခုသည် ကျောင်းသားတစ်ဦးအတွက် test အများအပြားမှ အမှတ်များစွာ သိမ်းဆည်းနိုင်သည်။ Single number ဆိုလျှင် အမှတ်အသစ်ထည့်ရတိုင်း ပျောက်မည်ဖြစ်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "အမှတ်ဇယားပြည့်ပြည့်ကို တည်ဆောက်ပါ။ ထို့နောက် feature တစ်ခုထပ်ထည့်ပါ — ကျောင်းသားအားလုံး၏ class average ပြသသော function တစ်ခု။",
+      "starterCode": "students = {}\n\ndef add_student(name, score):\n    if name not in students:\n        students[name] = []\n    students[name].append(score)\n\ndef get_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n\ndef get_grade(average):\n    if average >= 90: return \"A\"\n    elif average >= 80: return \"B\"\n    elif average >= 70: return \"C\"\n    elif average >= 60: return \"D\"\n    else: return \"F\"\n\ndef show_all():\n    for name, scores in students.items():\n        avg = get_average(scores)\n        print(f\"{name}: {avg:.1f} ({get_grade(avg)})\")\n\n# Add a show_class_average() function\n\n# Build the main menu loop\n",
+      "hint": "Class average အတွက် — ကျောင်းသားအားလုံးမှ အမှတ်အားလုံးကို list တစ်ခုတည်းစုပြီး ထို list ၏ average တွက်ပါ။",
+      "solution": "students = {}\n\ndef add_student(name, score):\n    if name not in students:\n        students[name] = []\n    students[name].append(score)\n\ndef get_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n\ndef get_grade(average):\n    if average >= 90: return \"A\"\n    elif average >= 80: return \"B\"\n    elif average >= 70: return \"C\"\n    elif average >= 60: return \"D\"\n    else: return \"F\"\n\ndef show_all():\n    if len(students) == 0:\n        print(\"No students yet.\"); return\n    for name, scores in students.items():\n        avg = get_average(scores)\n        print(f\"{name}: {avg:.1f} ({get_grade(avg)})\")\n\ndef show_class_average():\n    all_scores = []\n    for scores in students.values():\n        all_scores.extend(scores)\n    if len(all_scores) == 0:\n        print(\"No scores yet.\"); return\n    print(f\"Class average: {get_average(all_scores):.1f}\")\n\nwhile True:\n    print(\"\\n1.Add  2.Show all  3.Class avg  4.Quit\")\n    c = input(\"Choose: \")\n    if c == \"1\":\n        n = input(\"Name: \").strip().title()\n        s = float(input(\"Score: \"))\n        add_student(n, s); print(\"Added.\")\n    elif c == \"2\": show_all()\n    elif c == \"3\": show_class_average()\n    elif c == \"4\": print(\"Goodbye!\"); break\n    else: print(\"Invalid.\")"
+    }
+  ]
+}

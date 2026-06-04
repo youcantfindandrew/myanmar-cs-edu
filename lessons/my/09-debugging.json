@@ -1,0 +1,51 @@
+{
+  "id": "09-debugging",
+  "title": "Bug ရှာဖွေခြင်း — အမှားများ ပြင်ဆင်ခြင်း",
+  "description": "မှားယွင်းချက်မက်ဆေ့ချ်များ ဖတ်တတ်ပြီး ကျတော်သောကုဒ်ကို ပရိုဂရမ်မာကဲ့သို့ ပြင်ပါ။",
+  "estimatedMinutes": 20,
+  "sections": [
+    {
+      "type": "text",
+      "content": "ပရိုဂရမ်မာတိုင်း ကျသောကုဒ် ရေးသည်။ အတွေ့အကြုံ ၂၀ နှစ်ရှိသော engineer များပင် နေ့တိုင်း အမှားများ ဖြစ်ကြသည်။\n\nDebugging ဆိုသည်မှာ ထိုအမှားများကို ရှာဖွေပြင်ဆင်ခြင်း ကျွမ်းကျင်မှုဖြစ်သည်။ ပရိုဂရမ်မင်းတွင် အရေးအကြီးဆုံး ကျွမ်းကျင်မှုများထဲမှ တစ်ခုဖြစ်သည်။"
+    },
+    {
+      "type": "text",
+      "content": "Python သည် ကူညီသောအမှားမက်ဆေ့ချ်များပေးသည်။ ၎င်းတို့ကြောင့်ကြောင့် ဖြစ်နိုင်သော်လည်း အသုံးဝင်သောအချက်အလက်များ ပါဝင်သည်\n\n- အမှားအမျိုးအစား (ဥပမာ `SyntaxError`၊ `NameError`၊ `TypeError`)\n- အမှားဖြစ်သော line number\n- ဘာမှားသည်ဆိုသော တိုတိုဖော်ပြချက်\n\nအမှားမက်ဆေ့ချ်၏ နောက်ဆုံးကြောင်းကို အရင်ဆုံး ဖတ်ပါ။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# SyntaxError — Python cannot understand your code\nprint(\"Hello\"    # missing closing parenthesis\n\n# NameError — you used a variable that does not exist\nprint(mesage)    # typo: should be 'message'\n\n# TypeError — wrong type in an operation\nage = \"16\"\nprint(age + 1)   # can't add string and number",
+      "explanation": "SyntaxError — ကုဒ်ကိုယ်တိုင် မှားသည် (သဒ္ဒါမှားကဲ့သို့)။ NameError — မရှိသောအရာကို ကိုးကားသည် — များသောအားဖြင့် စာလုံးပေါင်းမှားခြင်းဖြစ်သည်။ TypeError — မကိုက်ညီသော အမျိုးအစားများကို ပေါင်းစပ်ရန် ကြိုးစားသည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "သင်၏ကုဒ် crash ဖြစ်ပြီး NameError: name 'scroe' is not defined ဟုပြသည်။ ပြဿနာ ဘာဖြစ်နိုင်သနည်း?",
+      "options": [
+        "ကွန်ပျူတာ နှေးနေသည်",
+        "ကိန်းရှင်အမည် စာလုံးပေါင်းမှားနေသည်",
+        "ဂဏန်းသည် ကြီးလွန်းသည်",
+        "Python ကောင်းမွန်စွာ install မဖြစ်ပါ"
+      ],
+      "correct": 1,
+      "explanation": "NameError သည် ပုံမှန်အားဖြင့် စာလုံးပေါင်းမှားကြောင်း ဆိုလိုသည်။ 'scroe' သည် 'score' ဖြစ်သင့်သည်။ ထိုကိန်းရှင်အမည် သုံးသောနေရာများကို စစ်ဆေးပါ။"
+    },
+    {
+      "type": "text",
+      "content": "Bug မည်သည့်မျိုးဖြစ်ဖြစ် ကူညီသောနည်းဗျူဟာ သုံးမျိုး\n\n1. **အမှားမက်ဆေ့ချ်ကို သေချာဖတ်ပါ** — line number နှင့် မက်ဆေ့ချ်သည် ဘယ်မှာကြည့်ရမည်ဆိုတာ ပြောပြသည်\n2. **ကိန်းရှင်များကို print ပြုပါ** — crash မဖြစ်မီ `print(variable)` ထည့်ပြီး ၎င်း၏ တကယ်တန်ဖိုးကို ကြည့်ပါ\n3. **ပြဿနာကို သေးငယ်အောင်ပြုပါ** — ပြဿနာဖြစ်သောကြောင်းကို ရှာသည်အထိ ကုဒ်ကို comment out ပြုပါ"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "# Strategy: print your variables to understand what is happening\n\nname = input(\"Name: \")\nage = input(\"Age: \")   # input returns a string!\n\nprint(\"Debug: name =\", name)\nprint(\"Debug: age =\", age, type(age))  # shows the type!\n\nnext_year = int(age) + 1   # convert before adding\nprint(f\"Next year {name} will be {next_year}\")",
+      "explanation": "ကိန်းရှင်များ စစ်ဆေးရန် print() calls ထည့်ခြင်းကို 'print debugging' ဟုခေါ်သည်။ ရိုးစင်းပြီး အလုပ်လုပ်သည်။ Bug ရှာပြီးနောက် debug lines ကို ဖယ်ရှားနိုင်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "အောက်ပါကုဒ်တွင် bug တစ်ခုရှိသည်။ မှန်ကန်သော average ထွက်အောင် ပြင်ပါ။\n\n(အကြံပြုချက် — ကိန်းရှင်တစ်ခုချင်စီ၏ အမျိုးအစားကို ကြည့်ပြီး စဉ်းစားပါ။)",
+      "starterCode": "score1 = input(\"Score 1: \")\nscore2 = input(\"Score 2: \")\n\n# This line has a bug:\ntotal = score1 + score2\naverage = total / 2\nprint(\"Average:\", average)\n",
+      "hint": "input() သည် အမြဲ string ပြန်ပေးသည်။ ပေါင်းမတိုင်မီ score1 နှင့် score2 ကို integer အဖြစ် ပြောင်းရမည်။",
+      "solution": "score1 = int(input(\"Score 1: \"))\nscore2 = int(input(\"Score 2: \"))\n\ntotal = score1 + score2\naverage = total / 2\nprint(\"Average:\", average)"
+    }
+  ]
+}

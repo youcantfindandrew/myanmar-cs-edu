@@ -1,0 +1,61 @@
+{
+  "id": "10-mini-project-calculator",
+  "title": "Mini Project — ဂဏန်းတွက်စက် တည်ဆောက်ခြင်း",
+  "description": "အရာအားလုံးကို ပေါင်းစပ်ပါ — အလုပ်လုပ်သောဂဏန်းတွက်စက်ကို အစကနေ တည်ဆောက်ပါ။",
+  "estimatedMinutes": 35,
+  "sections": [
+    {
+      "type": "text",
+      "content": "ကိန်းရှင်များ၊ ဒေတာအမျိုးအစားများ၊ အဝင်/အထွက်၊ အခြေအနေများ၊ loop များ နှင့် function များကို သင်ယူပြီးဖြစ်သည်။ ယခု အားလုံးကို ပေါင်းစပ်မည်ဖြစ်သည်။\n\nဤ project တွင် command-line ဂဏန်းတွက်စက်တစ်ခု တည်ဆောက်မည် — ဂဏန်းနှစ်ခုမေးမည်၊ operation ရွေးစေမည်၊ ရလဒ်ပြမည်၊ ထပ်တွက်လိုသလားမေးမည်။"
+    },
+    {
+      "type": "text",
+      "content": "အဆင့်တစ်ဆင့်ချင်း တည်ဆောက်ကြပါစို့။\n\nအဆင့် ၁ — operation တစ်ခုချင်းစီအတွက် function များ ရေးပါ။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def add(a, b):\n    return a + b\n\ndef subtract(a, b):\n    return a - b\n\ndef multiply(a, b):\n    return a * b\n\ndef divide(a, b):\n    if b == 0:\n        return \"Error: cannot divide by zero\"\n    return a / b",
+      "explanation": "Operation တစ်ခုချင်စီသည် ၎င်းကိုယ်ပိုင် function ဖြစ်သည်။ divide function တွင် သုညဖြင့် စားခြင်းကို စစ်ဆေးသည် — မစစ်ဆေးလျှင် ပရိုဂရမ် crash ဖြစ်မည်။"
+    },
+    {
+      "type": "text",
+      "content": "အဆင့် ၂ — သုံးစွဲသူထံမှ input ယူပြီး မှန်ကန်သော function ကို call ပြုပါ။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "num1 = float(input(\"First number: \"))\nnum2 = float(input(\"Second number: \"))\n\nprint(\"Operations: + - * /\")\nop = input(\"Choose operation: \")\n\nif op == \"+\":\n    result = add(num1, num2)\nelif op == \"-\":\n    result = subtract(num1, num2)\nelif op == \"*\":\n    result = multiply(num1, num2)\nelif op == \"/\":\n    result = divide(num1, num2)\nelse:\n    result = \"Unknown operation\"\n\nprint(f\"Result: {result}\")",
+      "explanation": "int() အစား float() သုံးသောကြောင့် ဂဏန်းတွက်စက်သည် ဒဿမဂဏန်းများကို ကိုင်တွယ်နိုင်သည်။ ထို့နောက် if/elif ဖြင့် သုံးစွဲသူ ရိုက်ထည့်သည်အပေါ်မူတည်၍ မှန်ကန်သော function ကို call ပြုသည်။"
+    },
+    {
+      "type": "text",
+      "content": "အဆင့် ၃ — ပရိုဂရမ် restart မပြုဘဲ သုံးစွဲသူ အကြိမ်များစွာ တွက်ချက်နိုင်ရန် loop ထည့်ပါ။"
+    },
+    {
+      "type": "code-demo",
+      "language": "python",
+      "code": "def add(a, b): return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef divide(a, b):\n    if b == 0: return \"Error: cannot divide by zero\"\n    return a / b\n\nwhile True:\n    num1 = float(input(\"First number: \"))\n    num2 = float(input(\"Second number: \"))\n    op   = input(\"Operation (+ - * /): \")\n\n    if op == \"+\":   print(\"Result:\", add(num1, num2))\n    elif op == \"-\": print(\"Result:\", subtract(num1, num2))\n    elif op == \"*\": print(\"Result:\", multiply(num1, num2))\n    elif op == \"/\": print(\"Result:\", divide(num1, num2))\n    else:           print(\"Unknown operation\")\n\n    again = input(\"Calculate again? (yes/no): \")\n    if again != \"yes\":\n        break\n\nprint(\"Goodbye!\")",
+      "explanation": "while True သည် အဆုံးမသတ်ဘဲ ဆက်သွားသည်။ break သည် သုံးစွဲသူ 'yes' မရိုက်ထည့်သောအခါ loop ကို ထွက်သည်။ ဤသည်မှာ ပြည့်စုံသောအလုပ်လုပ်သောဂဏန်းတွက်စက်ပရိုဂရမ်ဖြစ်သည်။"
+    },
+    {
+      "type": "quiz",
+      "question": "ဂဏန်းများအတွက် int(input(...)) အစား float(input(...)) သုံးသည်မှာ ဘာကြောင့်နည်း?",
+      "options": [
+        "float သည် int ထက် မြန်သည်",
+        "ဂဏန်းတွက်စက်သည် 3.5 ကဲ့သို့ ဒဿမဂဏန်းများကို ကိုင်တွယ်နိုင်ရန်",
+        "input() သည် float များကို ပုံမှန်ပြန်ပေးသည်",
+        "int() သည် ဂဏန်းတွက်စက်များနှင့် အလုပ်မလုပ်ပါ"
+      ],
+      "correct": 1,
+      "explanation": "float() သည် ကိန်းပြည့်နှင့် ဒဿမနှစ်မျိုးစလုံးကို လက်ခံသောကြောင့် ဂဏန်းတွက်စက် ပိုအသုံးဝင်သည်။ သုံးစွဲသူ '3.5' ရိုက်ထည့်ပါက int() crash ဖြစ်မည်ဖြစ်သည်။"
+    },
+    {
+      "type": "exercise",
+      "prompt": "ဂဏန်းတွက်စက်ပြည့်ပြည့်ကို တည်ဆောက်ပါ။ ထို့နောက် operation တစ်ခုထပ်ထည့်ပါ — power (Python တွင် **)။ သုံးစွဲသူ '^' ရိုက်ထည့်ပါက ပထမဂဏန်းကို ဒုတိယဂဏန်းမြှောက်ကိန်းဖြင့် တွက်ချက်ပါ (ဥပမာ 2 ^ 3 = 8)။",
+      "starterCode": "def add(a, b): return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef divide(a, b):\n    if b == 0: return \"Error: cannot divide by zero\"\n    return a / b\n\n# Add a power function here\n\nwhile True:\n    num1 = float(input(\"First number: \"))\n    num2 = float(input(\"Second number: \"))\n    op   = input(\"Operation (+ - * / ^): \")\n\n    # Add cases for all operations including ^\n    \n    again = input(\"Calculate again? (yes/no): \")\n    if again != \"yes\":\n        break\n",
+      "hint": "def power(a, b): return a ** b  ထို့နောက် elif op == '^': print('Result:', power(num1, num2)) ထည့်ပါ",
+      "solution": "def add(a, b): return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef divide(a, b):\n    if b == 0: return \"Error: cannot divide by zero\"\n    return a / b\ndef power(a, b): return a ** b\n\nwhile True:\n    num1 = float(input(\"First number: \"))\n    num2 = float(input(\"Second number: \"))\n    op   = input(\"Operation (+ - * / ^): \")\n\n    if op == \"+\":   print(\"Result:\", add(num1, num2))\n    elif op == \"-\": print(\"Result:\", subtract(num1, num2))\n    elif op == \"*\": print(\"Result:\", multiply(num1, num2))\n    elif op == \"/\": print(\"Result:\", divide(num1, num2))\n    elif op == \"^\": print(\"Result:\", power(num1, num2))\n    else:           print(\"Unknown operation\")\n\n    again = input(\"Calculate again? (yes/no): \")\n    if again != \"yes\":\n        break\n\nprint(\"Goodbye!\")"
+    }
+  ]
+}
